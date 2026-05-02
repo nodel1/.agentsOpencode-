@@ -27,9 +27,21 @@ Alternatively, can be invoked manually with:
 
 ## Workflow
 
-### 1. Detect Changes
+### 1. Check for Pending Updates
 
-Run the following command to get the list of changed files in the last commit:
+First, check if there's a pending-updates file from bash pushes:
+
+```bash
+if [ -f "context/pending-updates.md" ]; then
+    cat context/pending-updates.md
+fi
+```
+
+If it has pending changes (Status: pending_agent_review), use those files instead of git diff.
+
+### 2. Detect Changes
+
+If no pending file, run the following command to get the list of changed files in the last commit:
 
 ```bash
 git diff --name-only HEAD~1..HEAD
@@ -37,7 +49,7 @@ git diff --name-only HEAD~1..HEAD
 
 If this fails (e.g., first commit), use an empty list.
 
-### 2. Analyze Changes
+### 3. Analyze Changes
 
 Parse the changed files and map them to context files:
 
@@ -50,11 +62,12 @@ Parse the changed files and map them to context files:
 | `package.json` | `context/plugins.md`, `context/workflow-and-git.md` |
 | `.opencode/agents/subagent/*.md` | `context/agents.md` |
 | New folders in `.opencode/` | `context/workflow-and-git.md` |
+| `context/pending-updates.md` | Read for pending changes |
 
 If no relevant changes detected:
 - Exit and report: "No context files needed update"
 
-### 3. Update or Create Context Files
+### 4. Update or Create Context Files
 
 **For EXISTING context files** (updates):
 - Scan relevant directories
@@ -95,6 +108,25 @@ Context files updated:
 - context/mcp-and-tooling.md - Added new skill: <skill-name>
 - context/agents.md - Added new agent: <agent-name>
 ...
+```
+
+Then clear the pending-updates file:
+
+```bash
+# Clear the pending-updates file after processing
+if [ -f "context/pending-updates.md" ]; then
+    cat > context/pending-updates.md << 'EOF'
+# Pending Context Updates
+
+_last cleared after agent review_
+
+## Status
+
+- `cleared` - Processed
+
+---
+EOF
+fi
 ```
 
 ## Error Handling
