@@ -125,6 +125,7 @@ if [ -f "context/pending-updates.md" ]; then
 fi
 ```
 
+
 ## Error Handling
 
 If updating fails:
