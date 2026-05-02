@@ -5,7 +5,7 @@
 
 remote="$1"
 url="$2"
-z40=0000000000000000000000000000000000000
+z40=0000000000000000000000000000000000000000
 PENDING_FILE="context/pending-updates.md"
 
 # Create context folder if needed
