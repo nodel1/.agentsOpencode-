@@ -68,25 +68,28 @@ Rules:
 
 ### Git Hooks
 
-No pre-commit hooks configured yet (lefthook not installed in this project).
+Git hooks are configured in `.githooks/` directory and enabled via `git config core.hooksPath .githooks`.
+
+Current hooks:
+- `commit-msg` - Validates conventional commits format (from existing `.githooks` file)
+- `post-push` - Runs after each push to remind context update
 
 ### Context Update Workflow
 
-The context-updater subagent is designed to run **automatically after a git push** via the git-agent.
+The context-updater subagent updates context files automatically when using the git-agent.
 
-**How it works:**
-1. User asks agent to make a commit and push
-2. git-agent validates, commits, and pushes
-3. git-agent invokes context-updater after successful push
-4. context-updater detects changes and updates context files
+**Automatic (via agent):**
+1. User asks agent to commit and push
+2. git-agent executes commit and push
+3. git-agent invokes context-updater
+4. context-updater updates context files
 
-**Limitation:** When running `git push` directly via bash, the context-updater does NOT run automatically.
+**Manual (via bash or when agent fails):**
+1. Run: `opencode`
+2. Ask: "Update our context files based on the changes we just made"
 
-**Workaround:** After pushing directly via bash, run:
-```
-opencode
-```
-Then ask: "Update our context files based on the changes we just made"
+**Hook fallback (post-push hook):**
+The `.githooks/post-push` hook runs after each push and reminds you to update context files.
 
 ### Branch Strategy
 
