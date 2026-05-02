@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+# Regex basado en Conventional Commits
+commit_msg_type_regex='feat|fix|refactor|style|test|docs|build|chore|perf|ops'
+commit_msg_scope_regex='.{1,20}'
+commit_msg_description_regex='.{1,100}'
+commit_msg_regex="^(${commit_msg_type_regex})(\(${commit_msg_scope_regex}\))?!?: (${commit_msg_description_regex})\$"
+merge_msg_regex="^Merge branch '.+'\$"
+
+commit_msg_header=$(head -n1 "$1")
+
+# Validar el mensaje
+if ! [[ "$commit_msg_header" =~ ($commit_msg_regex)|($merge_msg_regex) ]]; then
+  echo "" >&2
+  echo " AVISO: El formato del commit no sigue el estandar." >&2
+  echo "Tu mensaje: $commit_msg_header" >&2
+  echo "Esperado:   tipo(ambito): descripcion" >&2
+  echo "Ejemplo:    feat(auth): add login button" >&2
+  echo "" >&2
+  
+  read -p "¿Quieres forzar el commit y continuar de todos modos? (y/N): " response < /dev/tty
+  
+  # Comprobar 'y' o 'Y'
+  if [[ "$response" =~ ^[Yy]$ ]]; then
+    echo "Pasando por alto la advertencia. Commit guardado." >&2
+    exit 0
+  else
+    echo "❌ Commit cancelado." >&2
+    exit 1
+  fi
+fi
