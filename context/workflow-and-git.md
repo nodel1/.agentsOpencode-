@@ -20,14 +20,15 @@
 ├── .opencode/
 │   ├── agents/
 │   │   └── subagent/
-│   │       └── git-agent.md
+│   │       ├── git-agent.md
+│   │       └── context-updater.md
 │   ├── skills/
 │   │   ├── agent-browser/
 │   │   ├── conventional-commits/
 │   │   ├── find-skills/
 │   │   └── rtk-token-optimizer/
 │   ├── plugins.md
-│   └── core.md (pendiente de crear)
+│   └── core.md
 ├── context/
 │   ├── workflow-and-git.md
 │   ├── tech-and-architecture.md
@@ -69,6 +70,24 @@ Rules:
 
 No pre-commit hooks configured yet (lefthook not installed in this project).
 
+### Context Update Workflow
+
+The context-updater subagent is designed to run **automatically after a git push** via the git-agent.
+
+**How it works:**
+1. User asks agent to make a commit and push
+2. git-agent validates, commits, and pushes
+3. git-agent invokes context-updater after successful push
+4. context-updater detects changes and updates context files
+
+**Limitation:** When running `git push` directly via bash, the context-updater does NOT run automatically.
+
+**Workaround:** After pushing directly via bash, run:
+```
+opencode
+```
+Then ask: "Update our context files based on the changes we just made"
+
 ### Branch Strategy
 
 - `main` - Production branch
@@ -92,4 +111,5 @@ No pre-commit hooks configured yet (lefthook not installed in this project).
 
 - No TypeScript/linting setup (not a code project)
 - No automated tests
-- `core.md` not yet created (baseline configuration)
+- Context files are up-to-date (see context/ folder)
+- Context-updater runs only through git-agent, not direct bash push
