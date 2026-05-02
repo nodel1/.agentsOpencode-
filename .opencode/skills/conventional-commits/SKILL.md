@@ -1,48 +1,175 @@
 ---
 name: conventional-commits
-description: Rules and guidelines for creating standardized git commit messages. Use this skill WHENEVER the user asks you to commit code, write a commit message, or do a git push.
+description: Rules and guidelines for creating standardized git commit messages and pushing. Use this skill WHENEVER the user asks to commit, push, or any git operation.
 ---
 
-# Conventional Commit Messages
+# Conventional Commits + Push Flow
 
-See how a minor change to your commit message style can make a difference. 
+## Commit message structure
 
-<pre>
-git commit -m"<b>&lt;type&gt;</b>(<b>&lt;optional scope&gt;</b>): <b>&lt;description&gt;</b>" \
-  -m"<b>&lt;optional body&gt;</b>" \
-  -m"<b>&lt;optional footer&gt;</b>"
-</pre>
+```
+<type>[optional scope]: <description>
 
-## Commit Message Formats
+[optional body]
+
+[optional footer(s)]
+```
 
 ### Types
-- Changes relevant to the API or UI:
-    - `feat` Commits that add, adjust or remove a feature to/of/from the API or UI
-    - `fix` Commits that fix an API or UI bug of a preceded `feat` commit
-- `refactor` Commits that rewrite or restructure code without altering API or UI behavior
-    - `perf` Commits are special type of `refactor` commits that specifically improve performance
-- `style` Commits that address code style (e.g., white-space, formatting, missing semi-colons) and do not affect application behavior
-- `test` Commits that add missing tests or correct existing ones
-- `docs` Commits that exclusively affect documentation
-- `build` Commits that affect build-related components such as build tools, dependencies, project version, ...
-- `ops` Commits that affect operational aspects like infrastructure (IaC), deployment scripts, CI/CD pipelines, backups, monitoring, or recovery procedures, ...
-- `chore` Commits that represent tasks like initial commit, modifying `.gitignore`, ...
 
-### Breaking Changes Indicator
-- A commit that introduce breaking changes **must** be indicated by an `!` before the `:` in the subject line e.g. `feat(api)!: remove status endpoint`
+| Type       | When to use                                      | SemVer impact |
+| ---------- | ------------------------------------------------ | ------------- |
+| `feat`     | Introduces a new feature                         | MINOR         |
+| `fix`      | Patches a bug                                    | PATCH         |
+| `refactor` | Code change that is neither a fix nor a feature  | —             |
+| `chore`    | Tooling, config, dependencies, maintenance       | —             |
+| `docs`     | Documentation only                               | —             |
+| `style`    | Formatting, whitespace — no logic change         | —             |
+| `perf`     | Performance improvement                          | —             |
+| `test`     | Adding or fixing tests                           | —             |
+| `build`    | Changes to build system or external dependencies | —             |
+| `ci`       | CI/CD configuration changes                      | —             |
+| `revert`   | Reverts a previous commit                        | —             |
 
-### Description
-The `description` contains a concise description of the change. 
-- The description is a **mandatory** part
-- Use the imperative, present tense: "change" not "changed" nor "changes"
-- **Do not** capitalize the first letter
-- **Do not** end the description with a period (`.`)
+### Breaking changes
+
+- Append `!` after type/scope: `feat(api)!: remove deprecated endpoint`
+- OR add footer: `BREAKING CHANGE: <description>`
+- `BREAKING CHANGE` MUST be uppercase. Correlates with MAJOR in SemVer.
+
+### Rules
+
+- Type MUST be a noun followed by `:` and a space.
+- `feat` MUST be used when adding a new feature.
+- `fix` MUST be used for bug fixes.
+- Scope is OPTIONAL — a noun in parentheses: `fix(auth): ...`
+- Description MUST immediately follow the `type: ` prefix.
+- Body is optional — starts one blank line after the description.
+- Footers start one blank line after the body. Format: `Token: value` or `Token #value`.
+- Footer tokens use `-` instead of spaces (except `BREAKING CHANGE`).
+- Types are NOT case-sensitive (but `BREAKING CHANGE` MUST be uppercase).
+- Description: use imperative mood, no uppercase first letter, no period at end.
 
 ### Examples
-- `feat: add email notifications on new direct messages`
-- `fix(shopping-cart): prevent order an empty shopping cart`
-- `build: update dependencies`
-- `style: remove empty line`
+
+```
+feat(logs): add admin_email column to audit tables
+```
+
+```
+fix(storage): use image/png for upload test to avoid MIME restriction
+```
+
+```
+chore(deps): add pg@8.20.0 as migration tool
+```
+
+```
+feat(logs)!: restructure LogEntry to include admin identity
+
+BREAKING CHANGE: LogEntry now requires admin_email field in all mappers
+```
+
+```
+fix: prevent race condition in cache invalidation
+
+Introduce request id and reference to latest request.
+
+Reviewed-by: Z
+Refs: #123
+```
+
+### Detailed Body Example (MANDATORY for multi-file features)
+
+```
+feat(import): add CSV bulk import for clients and projects
+
+Add /import page with 4-step flow (upload, preview, conflict resolution, result)
+Add lib/import-api.ts with checkClientConflicts() and importCsvRows() Server Actions
+Add components/csv-preview-table.tsx (CsvPreviewTable, ConflictCard, ImportResultSummary)
+Add conflict resolution UI: keep existing / overwrite name / create with new slug
+Fix createClient() to map SLUG_DUPLICATE same as createProject()
+Add papaparse@5.4.1 for CSV parsing (+ @types/papaparse@5.3.14)
+Add Importar CSV entry to sidebar
+```
+
+---
+
+## Push Flow — MANDATORY STEPS
+
+Every time a push is requested, follow these steps **in order without skipping**:
+
+### Step 1 — Stage all changes
+
+```bash
+git add .
+```
+
+Always use `git add .` to stage everything unless the user explicitly specifies individual files.
+
+### Step 2 — Inspect the diff
+
+Run `git diff --cached --stat` and `git diff --cached` to understand what is being committed.
+Categorize each change by type (feat / fix / chore / refactor / docs / etc.).
+
+### Step 3 — Draft the commit message
+
+Apply Conventional Commits rules:
+
+- Choose the correct `type` based on the nature of the changes.
+- Add a `scope` in parentheses if the change is scoped to a specific module/feature.
+- Write a concise description in imperative mood (e.g., "add", "fix", "update" — not "added", "fixed").
+- Add a body if the change is non-trivial.
+- Add `BREAKING CHANGE:` footer if any public API/contract changed.
+
+### Step 4 — ALWAYS ask for confirmation before committing
+
+**NEVER commit or push without explicit user approval.**
+
+Show the user:
+
+```
+Staged changes:
+  <output of git diff --cached --stat>
+
+Proposed commit message:
+  <type>(<scope>): <description>
+
+  <body if any>
+
+  <footers if any>
+
+¿Confirmas este commit y push?
+```
+
+Wait for the user to confirm before proceeding.
+
+### Step 5 — Commit
+
+```bash
+git commit -m "<type>(<scope>): <description>"
+```
+
+If there is a body or footer, use a multi-line commit via heredoc or temp file.
+
+### Step 6 — Push
+
+```bash
+git push
+```
+
+Only push after the commit succeeds and the user has confirmed.
+
+---
+
+## What NOT to do
+
+- NEVER run `git commit` before showing the proposed message to the user.
+- NEVER skip `git add .` — always stage first.
+- NEVER use `--no-verify` unless the user explicitly requests it.
+- NEVER push to `main` directly — warn the user if on main.
+- NEVER amend a commit that has already been pushed.
+- NEVER use `git push --force` on main/master.
 
 ---
 *Referencia basada en la especificación de Conventional Commits 1.0.0*
