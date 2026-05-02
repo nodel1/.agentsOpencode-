@@ -85,9 +85,9 @@ The context-updater subagent updates context files automatically when using the 
 4. context-updater updates context files
 
 **Manual (via bash):**
-1. Make your changes and push with `git push`
-2. Then run: `.githooks\run-pending.ps1` or `powershell -File .githooks\run-pending.ps1`
-3. Or ask: "Update our context files based on the changes we just made"
+1. Make your changes and commit
+2. Then run: `git push-context` (instead of `git push`)
+3. This runs the pending script automatically
 
 ### Branch Strategy
 
