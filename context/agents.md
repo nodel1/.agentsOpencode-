@@ -91,6 +91,7 @@ To add a new agent/subagent:
 
 For reference, see:
 - `.opencode/agents/subagent/git-agent.md`
+- `.opencode/agents/subagent/context-updater.md`
 
 ## Pending / Known Issues
 

@@ -17,6 +17,10 @@
 
 ```
 /
+├── .githooks/
+│   ├── commit-msg
+│   ├── post-push.bat
+│   └── run-pending.ps1
 ├── .opencode/
 │   ├── agents/
 │   │   └── subagent/
@@ -35,7 +39,8 @@
 │   ├── api-and-data.md
 │   ├── mcp-and-tooling.md
 │   ├── agents.md
-│   └── plugins.md
+│   ├── plugins.md
+│   └── pending-updates.md
 └── README.md
 ```
 
@@ -113,4 +118,5 @@ The context-updater subagent updates context files automatically when using the 
 - No TypeScript/linting setup (not a code project)
 - No automated tests
 - Context files are up-to-date (see context/ folder)
-- Context-updater runs only through git-agent, not direct bash push
+- Use `git push-context` for bash pushes to auto-track pending updates
+- Last context update: 2026-05-02
