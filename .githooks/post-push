@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # post-push hook
-# Detects changes after push and reminds to update context files
+# Detects changes after push and updates context files automatically
 
 remote="$1"
 url="$2"
@@ -24,7 +24,25 @@ while read local_ref local_sha remote_ref remote_sha; do
         fi
 
         echo "Changed files: $changed_files"
-        echo "Remember to update context files if needed."
+        echo ""
+
+        # Detect new context files
+        new_context_files=$(echo "$changed_files" | grep "^context/" || true)
+        if [ -n "$new_context_files" ]; then
+            echo "New context files detected:"
+            echo "$new_context_files"
+            echo ""
+        fi
+
+        # Update folder structure in workflow-and-git.md if needed
+        new_opencode_files=$(echo "$changed_files" | grep "\.opencode/" || true)
+        if [ -n "$new_opencode_files" ]; then
+            echo "OpenCode files changed - context may need update"
+            echo ""
+        fi
+
+        echo "Context update note: Run 'opencode' and ask to update context if needed."
+        echo "Or: 'Update our context files based on recent changes'"
     fi
 done
 
