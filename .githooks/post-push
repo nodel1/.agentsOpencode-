@@ -1,77 +1,56 @@
 #!/usr/bin/env bash
 
 # post-push hook
-# Detects changes after push and records them for context-updater
+# Accumulates changes for context-updater to process
 
 remote="$1"
 url="$2"
-
-z40=0000000000000000000000000000000000000000
-
-# File to store pending updates
+z40=0000000000000000000000000000000000000
 PENDING_FILE="context/pending-updates.md"
 
+# Create context folder if needed
+mkdir -p context
+
 while read local_ref local_sha remote_ref remote_sha; do
-    if [ "$local_sha" = "$z40" ]; then
-        continue
-    fi
+    if [ "$local_sha" = "$z40" ]; then continue; fi
 
     if echo "$remote_ref" | grep -q 'refs/heads/'; then
         branch_name=$(echo "$remote_ref" | sed 's|refs/heads/||')
-        echo "Post-push: Recording changes after push to $branch_name..."
+        timestamp=$(date '+%Y-%m-%d %H:%M')
 
-        # Get changed files
+        # Detect changed files
         if [ "$remote_sha" != "$z40" ]; then
             changed_files=$(git diff --name-only "$remote_sha"...HEAD 2>/dev/null)
         else
             changed_files=$(git diff --name-only HEAD~1...HEAD 2>/dev/null)
         fi
 
-        # Get timestamp
-        timestamp=$(date '+%Y-%m-%d %H:%M')
-
-        # Escape special characters for markdown
-        files_list=$(echo "$changed_files" | sed 's/^/- /')
-
-        # Read existing content if file exists
-        existing_last_push=""
-        if [ -f "$PENDING_FILE" ]; then
-            existing_last_push=$(grep -A5 "## Last Push" "$PENDING_FILE" | grep "Timestamp:" | cut -d':' -f2 | sed 's/^ *//')
+        # Format for markdown (skip empty)
+        if [ -n "$changed_files" ]; then
+            files_list=$(echo "$changed_files" | sed 's/^/- /')
+        else
+            files_list="- (no files)"
         fi
 
-        # Update the pending updates file
-        cat > "$PENDING_FILE" << EOF
-# Pending Context Updates
+        # Create header if file doesn't exist
+        if [ ! -f "$PENDING_FILE" ]; then
+            echo "# Pending Context Updates" > "$PENDING_FILE"
+            echo "" >> "$PENDING_FILE"
+            echo "_Note: Managed by git hooks. Run 'opencode' to process._" >> "$PENDING_FILE"
+            echo "" >> "$PENDING_FILE"
+        fi
 
-This file accumulates changes between bash pushes that don't go through the git-agent.
+        # Append to accumulate (NOT overwrite)
+        echo "## Push to $branch_name [$timestamp]" >> "$PENDING_FILE"
+        echo "**Status:** pending_agent_review" >> "$PENDING_FILE"
+        echo "**Changed files:**" >> "$PENDING_FILE"
+        echo "$files_list" >> "$PENDING_FILE"
+        echo "" >> "$PENDING_FILE"
+        echo "---" >> "$PENDING_FILE"
+        echo "" >> "$PENDING_FILE"
 
-## Usage
-
-When executing \`git push\` directly via bash:
-- The post-push hook records changed files here
-- The context-updater reads this file when invoked
-- After processing, context-updater clears this file
-
-## Last Push
-
-**Timestamp:** $timestamp
-
-**Changed files:**
-$files_list
-
-## Status
-
-- \`pending_agent_review\` - Awaiting agent update
-- \`cleared\` - Already processed
-
----
-
-_Note: Do not edit manually. This file is managed by post-push hook and context-updater._
-EOF
-
-        echo "Context changes recorded in $PENDING_FILE"
+        echo "Context changes tracked in $PENDING_FILE"
         echo "Run 'opencode' and ask to update context files when ready."
     fi
 done
-
 exit 0

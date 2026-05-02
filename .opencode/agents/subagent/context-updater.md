@@ -115,17 +115,13 @@ Then clear the pending-updates file:
 ```bash
 # Clear the pending-updates file after processing
 if [ -f "context/pending-updates.md" ]; then
-    cat > context/pending-updates.md << 'EOF'
-# Pending Context Updates
-
-_last cleared after agent review_
-
-## Status
-
-- `cleared` - Processed
-
----
-EOF
+    echo "# Pending Context Updates" > context/pending-updates.md
+    echo "" >> context/pending-updates.md
+    echo "_Last cleared: $(date '+%Y-%m-%d %H:%M')_" >> context/pending-updates.md
+    echo "" >> context/pending-updates.md
+    echo "**Status:** cleared" >> context/pending-updates.md
+    echo "" >> context/pending-updates.md
+    echo "---" >> context/pending-updates.md
 fi
 ```
 
