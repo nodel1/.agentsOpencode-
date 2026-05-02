@@ -1,39 +1,30 @@
 #!/usr/bin/env bash
 
 # post-push hook
-# Automatically updates context after git push
+# Detects changes after push and reminds to update context files
 
-# Get the remote URL and branch info
 remote="$1"
 url="$2"
 
 z40=0000000000000000000000000000000000000000
 
 while read local_ref local_sha remote_ref remote_sha; do
-    # Skip deletions
     if [ "$local_sha" = "$z40" ]; then
         continue
     fi
 
-    # Only process branch pushes
     if echo "$remote_ref" | grep -q 'refs/heads/'; then
         branch_name=$(echo "$remote_ref" | sed 's|refs/heads/||')
-        echo "Running context-updater after push to $branch_name..."
+        echo "Post-push: Detecting changes after push to $branch_name..."
 
-        # Get changed files
         if [ "$remote_sha" != "$z40" ]; then
             changed_files=$(git diff --name-only "$remote_sha"...HEAD 2>/dev/null)
         else
             changed_files=$(git diff --name-only HEAD~1...HEAD 2>/dev/null)
         fi
 
-        # Detect context file changes
-        echo "Detected changes: $changed_files"
-
-        echo ""
-        echo "NOTE: Context files should be updated."
-        echo "Run: opencode"
-        echo "Then ask: Update our context files based on the changes we just made"
+        echo "Changed files: $changed_files"
+        echo "Remember to update context files if needed."
     fi
 done
 

@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# Conventional Commits validation
+commit_msg_header=$(head -n1 "$1")
+
+# Check if matches conventional commits format
+if ! echo "$commit_msg_header" | grep -qE '^(feat|fix|refactor|style|test|docs|build|chore|perf|ops)(\(.+))?!?: .+'; then
+  if ! echo "$commit_msg_header" | grep -qE '^Merge'; then
+    echo "" >&2
+    echo " AVISO: El formato del commit no sigue el estandar." >&2
+    echo "Tu mensaje: $commit_msg_header" >&2
+    echo "Esperado:   tipo(ambito): descripcion" >&2
+    echo "Ejemplo:    feat(auth): add login button" >&2
+    exit 1
+  fi
+fi
