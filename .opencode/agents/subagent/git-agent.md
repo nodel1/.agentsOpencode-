@@ -58,6 +58,12 @@ Before `git push`:
 - Check if remote is configured
 - Execute `git push`
 
+### 7. Update context files (after push)
+After successful push, invoke the context-updater subagent:
+1. Invoke the context-updater subagent
+2. Let it detect and sync changes
+3. Report the context update results to the user
+
 ## Error Handling
 
 If commit message is invalid:
@@ -69,3 +75,8 @@ If git operation fails:
 1. Report the error
 2. Suggest possible solutions
 3. Wait for user input before retrying
+
+If context-updater fails:
+1. Log the error but do not block the main operation
+2. Report that context update failed
+3. Continue with normal flow
