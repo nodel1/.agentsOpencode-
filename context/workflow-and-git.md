@@ -71,8 +71,8 @@ Rules:
 Git hooks are configured in `.githooks/` directory and enabled via `git config core.hooksPath .githooks`.
 
 Current hooks:
-- `commit-msg` - Validates conventional commits format (from existing `.githooks` file)
-- `post-push` - Runs after each push to remind context update
+- `commit-msg` - Validates conventional commits format
+- `post-push.bat` - Windows hook (requires manual testing)
 
 ### Context Update Workflow
 
@@ -84,12 +84,10 @@ The context-updater subagent updates context files automatically when using the 
 3. git-agent invokes context-updater
 4. context-updater updates context files
 
-**Manual (via bash or when agent fails):**
-1. Run: `opencode`
-2. Ask: "Update our context files based on the changes we just made"
-
-**Hook fallback (post-push hook):**
-The `.githooks/post-push` hook runs after each push and reminds you to update context files.
+**Manual (via bash):**
+1. Make your changes and push with `git push`
+2. Then run: `.githooks\run-pending.ps1` or `powershell -File .githooks\run-pending.ps1`
+3. Or ask: "Update our context files based on the changes we just made"
 
 ### Branch Strategy
 
