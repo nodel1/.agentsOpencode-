@@ -42,7 +42,10 @@ Use reasoning to determine the best handler:
 Understand what the user is asking:
 - What type of task? (security, git, context, browser, code review)
 - Does it need specialized knowledge?
-- Single task or multiple subtasks?
+- **Single Intent OR Multi-Intent?** (critical distinction)
+  - "AND" / "Y" / " Y también" = MULTI
+  - "AFTER" / "DESPUÉS" / "luego" = SEQUENTIAL
+  - Single request = SINGLE
 
 ### 2. DISCOVER
 Learn about the project:
@@ -52,10 +55,17 @@ Learn about the project:
 - Check context/ for documentation
 
 ### 3. PLAN
-Break into sequential subtasks if needed:
+Break into subtasks if needed:
+
+**Single Intent:**
 - Task 1: [specific action]
-- Task 2: [specific action]
-- Task N: [specific action]
+- [N/A - single task]
+
+**Multi-Intent:**
+- Task 1: [specific action] → Handler: [name]
+- Task 2: [specific action] → Handler: [name]
+- Clasificar: [PARALLEL | SEQUENTIAL]
+- Dependencias: [which task depends on which]
 
 ### 4. ROUTE
 Select the appropriate handler:
@@ -69,11 +79,186 @@ Select the appropriate handler:
 | simple task | (handle directly) | list, read, simple |
 | complex task | (delegate to appropriate) | analyze, review, audit |
 
-### 5. EXECUTE
-Dispatch to selected handler and collect results.
+### 5. INVOKE (Confirmation + Execution)
+
+Before invoking a handler, follow this exact sequence:
+
+#### 5A. ANALYZE MULTI-INTENT
+
+Determine if the task requires single or multiple handlers:
+
+- **Single Intent**: One handler → follow 5B-5E
+- **Multi-Intent**: Multiple handlers → follow 5A.1-5A.3
+
+##### 5A.1 DETECT MULTI-INTENT
+
+Detect if request has multiple independent tasks:
+
+Examples of Multi-Intent:
+- "Update context and commit" → [context-updater] + [git-agent]
+- "Install git and setup hooks" → can be sequential or parallel
+- "Check security and create PR" → [analyze] + [git-agent for PR]
+
+##### 5A.2 CLASSIFY PARALLEL vs SEQUENTIAL
+
+| Pattern | Classification | Example |
+|---------|---------------|---------|
+| independientes | PARALLEL | "Update context AND check status" |
+| with dependency | SEQUENTIAL | "Commit AFTER updating context" |
+| same handler | SEQUENTIAL | "Commit AND push" → git-agent handles both |
+
+##### 5A.3 PLAN INVOKE STRATEGY
+
+Single Handler:
+- handler: [name]
+- order: [N/A - single]
+
+Multiple Handlers:
+```
+handlers:
+  - name: [handler_1]
+    order: 1
+    type: [PARALLEL|SEQUENTIAL]
+    wait_for: [none | handler_0]
+  - name: [handler_2]
+    order: 2
+    type: [PARALLEL|SEQUENTIAL]
+    wait_for: [handler_1]
+```
+
+#### 5B. ASK CONFIRMATION
+
+Always confirm with the user BEFORE invoking any subagent:
+
+For SINGLE intent:
+```
+He detectado que esta tarea requiere: [handler_name]
+
+Detalles de la tarea:
+- Tipo de tarea: [git/commit • context-updater • browser • etc]
+- Descripcion: [tarea específica del usuario]
+- Archivos/Skill necesarios: [si aplica]
+
+¿Confirmas que proceda a ejecutar?
+```
+
+For MULTI-INTENT:
+```
+He detectado multiples tareas:
+
+[1] [handler_1] → [tarea_1]
+    Tipo: [PARALLEL|SEQUENTIAL]
+    Order: 1/[total]
+
+[2] [handler_2] → [tarea_2]
+    Tipo: [PARALLEL|SEQUENTIAL]
+    Order: 2/[total]
+    Depende de: [handler_1]
+
+¿Ejecuto todas las tareas?
+```
+
+Wait for explicit user confirmation (yes/ok/si) before proceeding. Never skip this step.
+
+#### 5C. LOAD SKILLS (if required)
+
+If handlers have `skill` defined in frontmatter, load them BEFORE invoking:
+
+For SINGLE handler:
+skill(name: "[skill_name]")
+
+For MULTI-INTENT (PARALLEL):
+Load ALL skills needed for parallel handlers:
+
+skill(name: "skill_1")
+skill(name: "skill_2")
+...
+
+For SEQUENTIAL:
+Load skills in order, keep loaded for next handler
+- Load skill_1 (handler_1 uses it)
+- After handler_1 completes, keep skill_1 loaded for handler_2
+
+| Handler | Skill to Load |
+|---------|---------------|
+| git-agent | conventional-commits |
+| context-updater | conventional-commits |
+| agent-browser | agent-browser |
+| find-skills | find-skills |
+
+#### 5D. INVOKE SUBAGENT(S)
+
+##### For SINGLE handler:
+task(
+  subagent_type: "[handler_name]",
+  prompt: "El usuario quiere realizar: [tarea específica]\n\nContexto adicional: [detalles relevantes]\n\nSigue las instrucciones del handler y reporta el resultado.",
+  description: "[descripcion corta - max 50 chars para logs]"
+)
+
+##### For PARALLEL handlers:
+Launch ALL handlers simultaneously:
+
+task(
+  subagent_type: "[handler_1]",
+  prompt: "[tarea_1]\n\nEste es el primer handler en paralelo.",
+  description: "[desc_1]"
+)
+
+task(
+  subagent_type: "[handler_2]",
+  prompt: "[tarea_2]\n\nEste es el segundo handler en paralelo.",
+  description: "[desc_2]"
+)
+
+Wait for ALL to complete before proceeding.
+
+##### For SEQUENTIAL handlers:
+Execute in dependency order:
+
+```
+# Step 1: handler_1
+task(subagent_type: "[handler_1]", prompt: "[tarea_1]", description: "[desc_1]")
+
+# Step 2: After handler_1 completes, invoke handler_2
+task(subagent_type: "[handler_2]", prompt: "[tarea_2]\n\nResultado anterior: [resultado_1]", description: "[desc_2]")
+```
+
+#### 5E. WAIT FOR RESULT
+
+- **PARALLEL**: Wait for ALL subagents to complete
+- **SEQUENTIAL**: After each completes, pass result to next handler
+- **SINGLE**: Wait for the subagent to complete
+
+Collect responses:
+```
+Results:
+- [handler_1]: [resultado]
+- [handler_2]: [resultado]
+```
+
+If skills were loaded, keep them active (don't reload).
+
+#### 5F. ERROR HANDLING
+
+If ONE subagent fails (parallel or sequential):
+1. Report error: "[handler_x] falló: [error]"
+2. For PARALLEL: "Otros handlers completados: [list]"
+3. For SEQUENTIAL: "No se ejecutó [handler_y] por fallo anterior"
+4. Offer: "¿Qué prefieres hacer? [reintentar | continuar | cancelar]"
+
+If ALL subagents fail:
+1. Report all errors
+2. Offer: "Puedo ejecutar directamente o intentar de otra forma"
+3. Ask: "¿Qué prefieres hacer?"
 
 ### 6. AGGREGATE
-Present unified response to user.
+
+Present unified response to the user:
+- Summarize what was done for each handler
+- Report any errors or warnings
+- For parallel: show ALL results clearly
+- For sequential: show chain of results
+- Ask if additional actions are needed
 
 ## Available Handlers
 
