@@ -66,4 +66,4 @@ context/                # Context documentation
 
 ## License
 
-MIT
+MIT - See [LICENSE](LICENSE)
