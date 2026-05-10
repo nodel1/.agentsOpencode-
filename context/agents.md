@@ -2,9 +2,9 @@
 
 ## Overview
 
-This project has two agent directories:
-- `agents/` - 144+ VoltAgent agents (main, organized by category)
-- `.opencode/agents-old/` - Custom OpenCode agents (legacy)
+This project uses:
+- `.opencode/agents/` - 144+ VoltAgent agents (main, organized by category)
+- `.opencode/subagents/` - Custom OpenCode subagents (git-agent, task-manager)
 
 ## Subagents (Custom OpenCode)
 

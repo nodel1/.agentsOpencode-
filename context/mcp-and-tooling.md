@@ -28,7 +28,7 @@ Auto-loaded for git operations. Enforces format:
 ```
 <type>(<scope>): <description
 ```
-Types: feat, fix, refactor, style, test, docs, build, ops, chore
+Types: feat, fix, refactor, style, test, docs, build, ops, chore, ci, perf, revert
 
 ### find-skills
 Triggered when user asks: "how do I do X", "find a skill for X"
