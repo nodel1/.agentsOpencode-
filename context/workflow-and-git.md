@@ -22,26 +22,16 @@
 │   ├── post-push.bat
 │   └── run-pending.ps1
 ├── .opencode/
-│   ├── agents/
+│   ├── agents-old/
 │   │   └── subagent/
 │   │       ├── git-agent.md
-│   │       └── context-updater.md
+│   │       ├── context-updater.md
+│   │       └── task-manager.md    ← New: handles TODO system
 │   ├── skills/
-│   │   ├── agent-browser/
-│   │   ├── conventional-commits/
-│   │   ├── find-skills/
-│   │   └── rtk-token-optimizer/
-│   ├── plugins.md
 │   └── core.md
 ├── context/
-│   ├── workflow-and-git.md
-│   ├── tech-and-architecture.md
-│   ├── api-and-data.md
-│   ├── mcp-and-tooling.md
-│   ├── agents.md
-│   ├── plugins.md
-│   └── pending-updates.md
-└── README.md
+│   └── ...
+└── TODO.md               ← Session scratch pad (ephemeral)
 ```
 
 ## Git Workflow
@@ -113,10 +103,35 @@ The context-updater subagent updates context files automatically when using the 
 | `opencode`    | Run OpenCode agent                    |
 | Standard git  | git add / commit / push / pull        |
 
+## TODO System
+
+Two-tier task tracking:
+
+| File | Scope | Location |
+|------|-------|----------|
+| `.opencode/todo.md` | Persistent across sessions | `.opencode/` |
+| `TODO.md` | Session-only, ephemeral | Root |
+
+**`.opencode/todo.md` - Project Task Board:**
+- Persists across sessions (project-wide)
+- Agents can propose tasks with `[PROPOSED]` tag
+- User reviews and converts to `[ ]` or deletes
+- Mark completed tasks with `[x]`
+
+**`TODO.md` - Session Scratch Pad:**
+- Temporary notes for current session
+- Cleared at end of session
+- For quick brainstorms, temporary reminders
+
+**Agent Workflow:**
+1. Agent identifies work → writes `[PROPOSED] Task: description`
+2. User reviews → converts to `[ ]` or deletes
+3. Agent works → marks `[x]` when done
+
 ## Pending / Known Issues
 
 - No TypeScript/linting setup (not a code project)
 - No automated tests
 - Context files are up-to-date (see context/ folder)
 - Use `git push-context` for bash pushes to auto-track pending updates
-- Last context update: 2026-05-02
+- Last context update: 2026-05-10

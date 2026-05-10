@@ -2,17 +2,21 @@
 
 ## Overview
 
-This project defines custom agents and subagents to extend OpenCode's capabilities.
+This project has two agent directories:
+- `agents/` - 144+ VoltAgent agents (main, organized by category)
+- `.opencode/agents-old/` - Custom OpenCode agents (legacy)
 
-## Agents Defined
+## Subagents (Custom OpenCode)
 
 ### git-agent
 
 **Type:** Subagent  
 **Skill:** conventional-commits  
-**File:** `.opencode/agents/subagent/git-agent.md`
+**File:** `.opencode/subagents/git-agent.md`
 
 **Purpose:** Handle all git operations with conventional commits enforcement
+
+**Trigger:** User asks to commit, push, or any git operation
 
 **Responsibilities:**
 - Execute git operations (add, commit, push, pull, branch, merge)
@@ -33,71 +37,78 @@ This project defines custom agents and subagents to extend OpenCode's capabiliti
 - Provide corrected examples
 - Wait for user confirmation
 
-### context-updater
+### task-manager
 
 **Type:** Subagent  
 **Skill:** conventional-commits  
-**File:** `.opencode/agents/subagent/context-updater.md`
+**File:** `.opencode/subagents/task-manager.md`
 
-**Purpose:** Automatically update context files after git push operations
+**Purpose:** Manage the two-tier TODO task tracking system
+
+**Trigger:** User asks to add/complete/list tasks, or session ends
 
 **Responsibilities:**
-- Detect what files changed since last commit
-- Map changes to relevant context files
-- Update only the context files that need changes
-- Report what was updated
+- Add new tasks to persistent or session boards
+- List current tasks by priority/status
+- Mark tasks as in-progress or completed
+- Review proposed agent tasks
+- Clean up at session end
 
-**Workflow:**
-1. Detect changes via `git diff --name-only HEAD~1..HEAD`
-2. Analyze changes and map to context files
-3. Update relevant context files
-4. Report changes
+**TODO System:**
+| File | Scope |
+|------|-------|
+| `.opencode/todo.md` | Persistent across sessions |
+| `TODO.md` | Session-only (ephemeral) |
 
-**Trigger:** Automatically invoked by git-agent after successful push
+**Agent Workflow:**
+1. Agent identifies work → writes `[PROPOSED]` to persistent TODO
+2. User reviews → converts to `[ ]` or deletes
+3. Agent works → marks `[x]` when done
 
-**Error Handling:**
-- Log error but do not block main operation
-- Report that context update failed
-- Continue with normal flow
+## VoltAgent Orchestrator (Main)
+
+### agent-organizer
+
+**Type:** Meta-orchestration  
+**File:** `.opencode/agents/09-meta-orchestration/agent-organizer.md`
+
+**Purpose:** Main orchestrator that discovers and routes to appropriate agents
+
+**Features:**
+- Dynamic agent discovery (scans folders on activation)
+- Keyword-based routing
+- Context-aware orchestration
 
 ## How to Use
 
-### Invoking git-agent
+### Invoking Subagents
 
-When the user asks to:
-- Make a commit
-- Push changes
-- Any git operation
+The core OpenCode agent invokes subagents automatically based on triggers:
 
-The core agent will invoke git-agent automatically.
+| Subagent | Trigger |
+|----------|---------|
+| git-agent | "commit", "push", "git operation" |
+| task-manager | "add task", "show tasks", "complete task" |
 
 ### Agent Communication
 
-- git-agent operates autonomously once invoked
-- Returns results to the user via core agent
-- Reports errors with actionable feedback
+- Subagents operate autonomously once invoked
+- Return results to the user via core agent
+- Report errors with actionable feedback
 
-## Adding New Agents
+## Adding New Subagents
 
-To add a new agent/subagent:
+To add a new subagent:
 
-1. Create `.opencode/agents/<type>/<name>.md`
+1. Create `.opencode/subagents/<name>.md`
 2. Define:
    - Frontmatter (description, mode, skill)
    - Core responsibilities
    - Workflow
    - Error handling
-3. Register in skill if needed
-
-For reference, see:
-- `.opencode/agents/subagent/git-agent.md`
-- `.opencode/agents/subagent/context-updater.md`
+3. Add entry to this file
 
 ## Pending / Known Issues
 
-- git-agent and context-updater defined
-- More agents could be added as project expands 
-
-
-
-
+- git-agent and task-manager defined in `.opencode/subagents/`
+- Using VoltAgent agent-organizer as main orchestrator
