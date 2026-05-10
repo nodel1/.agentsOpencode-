@@ -25,10 +25,14 @@ cd your-project
 ├── agents/             # 144+ VoltAgent agents
 ├── subagents/          # Custom: git-agent, task-manager, planner, build-error-resolver, doc-updater
 ├── skills/             # 17 skills installed
+├── docs/               # Documentation system
+│   ├── CODEMAPS/       # Architecture codemaps
+│   └── GUIDES/         # Setup and usage guides
 ├── todo.md             # Persistent task board
 └── agent-organizer.md  # Main orchestrator
 
-context/                # Context documentation
+context/                # Agent-only documentation
+docs/                   # Human documentation (generated from src/)
 .githooks/              # Git hooks (commit-msg)
 ```
 

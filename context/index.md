@@ -2,7 +2,12 @@
 
 This folder contains documentation files that help agents understand the project state.
 
-## Context Files
+## Documentation Structure
+
+This template has two documentation systems:
+
+### `context/` — Agent-Only Documentation
+For AI agents to understand the project structure, skills, and workflows.
 
 | File | Purpose |
 |------|---------|
@@ -10,6 +15,28 @@ This folder contains documentation files that help agents understand the project
 | `tech-and-architecture.md` | Project identity, folder structure |
 | `mcp-and-tooling.md` | Skills installed, tools available, commands |
 | `workflow-and-git.md` | Git workflow, conventional commits, TODO system |
+
+### `docs/` — Human Documentation
+For developers to understand the codebase architecture and setup.
+
+```
+docs/
+├── CODEMAPS/       # Generated architecture maps
+│   ├── INDEX.md    # Overview of all areas
+│   ├── frontend.md # Frontend structure
+│   ├── backend.md   # API/routes structure
+│   └── database.md  # DB schema (if applicable)
+└── GUIDES/
+    └── setup.md    # How to run the project
+```
+
+## When to Update
+
+- New skill added → Update `mcp-and-tooling.md`
+- New agent created → Update `agents.md`
+- Folder structure changed → Update `tech-and-architecture.md`
+- Git workflow changed → Update `workflow-and-git.md`
+- New features/changes → Update `docs/CODEMAPS/*.md`
 
 ## How to Use
 
@@ -26,13 +53,6 @@ After significant changes:
 2. Update with new information
 3. Keep format consistent with existing file
 4. Use English for all content
-
-## When to Update
-
-- New skill added → Update `mcp-and-tooling.md`
-- New agent created → Update `agents.md`
-- Folder structure changed → Update `tech-and-architecture.md`
-- Git workflow changed → Update `workflow-and-git.md`
 
 ## Task Tracking
 
