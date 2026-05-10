@@ -6,7 +6,7 @@ This project uses:
 - `.opencode/agents/` - 144+ VoltAgent agents (main, organized by category)
 - `.opencode/subagents/` - Custom OpenCode subagents (git-agent, task-manager)
 
-## Subagents (Custom OpenCode)
+## Custom Subagents
 
 ### git-agent
 
@@ -38,6 +38,54 @@ This project uses:
 - Report violations with specific feedback
 - Provide corrected examples
 - Wait for user confirmation
+
+### planner
+
+**Type:** Subagent  
+**Source:** [affaan-m/everything-claude-code](https://github.com/affaan-m/everything-claude-code)  
+**File:** `.opencode/subagents/planner.md`
+
+**Purpose:** Expert planning specialist for complex features and refactoring
+
+**Trigger:** User asks to plan feature, implement architecture, or complex refactoring
+
+**Responsibilities:**
+- Analyze requirements and create detailed implementation plans
+- Break down complex features into manageable steps
+- Identify dependencies and potential risks
+- Suggest optimal implementation order
+
+### build-error-resolver
+
+**Type:** Subagent  
+**Source:** [affaan-m/everything-claude-code](https://github.com/affaan-m/everything-claude-code)  
+**File:** `.opencode/subagents/build-error-resolver.md`
+
+**Purpose:** Build and TypeScript error resolution with minimal changes
+
+**Trigger:** Build fails or type errors occur
+
+**Responsibilities:**
+- Fix TypeScript errors with minimal diffs
+- Resolve build compilation failures
+- Fix dependency and configuration issues
+- No architecture changes - only error fixes
+
+### doc-updater
+
+**Type:** Subagent  
+**Source:** [affaan-m/everything-claude-code](https://github.com/affaan-m/everything-claude-code)  
+**File:** `.opencode/subagents/doc-updater.md`
+
+**Purpose:** Documentation and codemap generation
+
+**Trigger:** User asks to update docs, generate codemaps, or refresh documentation
+
+**Responsibilities:**
+- Generate architectural codemaps
+- Update READMEs and guides from code
+- Track dependencies across modules
+- Keep docs in sync with codebase
 
 ### task-manager
 
@@ -91,6 +139,9 @@ The core OpenCode agent invokes subagents automatically based on triggers:
 |----------|---------|
 | git-agent | "commit", "push", "git operation" |
 | task-manager | "add task", "show tasks", "complete task" |
+| planner | "plan feature", "implement architecture", "complex refactoring" |
+| build-error-resolver | "build failed", "type error", "fix errors" |
+| doc-updater | "update docs", "generate codemap", "refresh documentation" |
 
 ### Agent Communication
 

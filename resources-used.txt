@@ -11,6 +11,13 @@ Documentation of all tools, repositories, and articles used to build this agent 
 - **Content:** 144 subagents in 10 categories
 - **Stars:** 26.4k
 
+### everything-claude-code - Subagent Collection
+- **URL:** https://github.com/affaan-m/everything-claude-code
+- **Author:** affaan-m
+- **Stars:** 178k
+- **Content:** 55+ subagents including planner, build-error-resolver, doc-updater
+- **Subagents Added:** planner.md, build-error-resolver.md, doc-updater.md
+
 ### agent-browser - Browser Automation for AI Agents
 - **URL:** https://github.com/vercel-labs/agent-browser
 - **Author:** Vercel Labs
@@ -57,9 +64,15 @@ Documentation of all tools, repositories, and articles used to build this agent 
 
 [VoltAgent - 144 Claude Code Subagents](https://github.com/VoltAgent/awesome-claude-code-subagents)
 
+[everything-claude-code - affaan-m](https://github.com/affaan-m/everything-claude-code)
+
 [Web Quality Skills - Addy Osmani](https://github.com/addyosmani/web-quality-skills)
 
 [Vercel Agent Skills](https://github.com/vercel-labs/agent-skills)
+
+[agent-browser - Vercel Labs](https://github.com/vercel-labs/agent-browser)
+
+[RTK - Rust Token Killer](https://github.com/rtk-ai/rtk)
 
 [How Agents Plan Tasks with To-Do Lists - Kenneth Leung](https://towardsdatascience.com/how-agents-plan-tasks-with-to-do-lists/)
 

@@ -6,7 +6,7 @@ Personal OpenCode agent configuration template with 144+ specialized agents and 
 
 - **144+ VoltAgent agents** organized by category
 - **17 skills** for web quality, React, and general development
-- **Custom subagents** for git operations and task management
+- **5 custom subagents** for git, tasks, planning, docs, and build errors
 - **Two-tier TODO system** for persistent and session tasks
 - **Conventional commits** enforcement
 
@@ -23,7 +23,7 @@ cd your-project
 ```
 .opencode/
 ├── agents/             # 144+ VoltAgent agents
-├── subagents/          # Custom: git-agent, task-manager
+├── subagents/          # Custom: git-agent, task-manager, planner, build-error-resolver, doc-updater
 ├── skills/             # 17 skills installed
 ├── todo.md             # Persistent task board
 └── agent-organizer.md  # Main orchestrator
@@ -40,6 +40,18 @@ context/                # Context documentation
 | Web Quality (6) | web-quality-audit, performance, core-web-vitals, accessibility, seo, best-practices |
 | Vercel (7) | vercel-react-best-practices, web-design-guidelines, vercel-react-native-skills, vercel-react-view-transitions, vercel-composition-patterns, deploy-to-vercel, vercel-cli-with-tokens |
 
+## Custom Subagents (5)
+
+| Subagent | Purpose | Trigger |
+|----------|---------|---------|
+| git-agent | Git operations + context updates | "commit", "push" |
+| task-manager | TODO system management | "add task", "show tasks" |
+| planner | Complex feature planning | "plan feature", "architecture" |
+| build-error-resolver | Build/type error fixes | "build failed", "fix errors" |
+| doc-updater | Documentation & codemaps | "update docs", "generate codemap" |
+
+*3 subagents from [affaan-m/everything-claude-code](https://github.com/affaan-m/everything-claude-code)*
+
 ## Usage
 
 ```bash
@@ -51,15 +63,20 @@ context/                # Context documentation
 "show my tasks"
 "mark task as complete"
 
-# Skills (auto-activate)
-"optimize for SEO"
-"review my UI"
-"deploy to Vercel"
+# Planning
+"plan a new feature: User authentication"
+
+# Build errors
+"fix the build errors"
+
+# Documentation
+"update docs" or "generate codemap"
 ```
 
 ## Resources
 
 - [VoltAgent - 144 Claude Code Subagents](https://github.com/VoltAgent/awesome-claude-code-subagents)
+- [everything-claude-code - affaan-m](https://github.com/affaan-m/everything-claude-code)
 - [Web Quality Skills - Addy Osmani](https://github.com/addyosmani/web-quality-skills)
 - [Vercel Agent Skills](https://github.com/vercel-labs/agent-skills)
 - [Skills.sh - Skills Marketplace](https://skills.sh/)
