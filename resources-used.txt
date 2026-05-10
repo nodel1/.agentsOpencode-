@@ -1,0 +1,170 @@
+# Recursos y Herramientas para mi Proyecto de Agentes OpenCode
+
+Documentación de todas las herramientas, repos y artículos usados para crear mi sistema de agentes.
+
+---
+
+## Enlaces Principales
+
+### Repositorio de Subagents
+- **URL:** https://github.com/VoltAgent/awesome-claude-code-subagents
+- **Contenido:** 144 subagents organizados en 10 categorías
+- **Categorías:**
+  - 01-core-development (11 agentes)
+  - 02-language-specialists (31 agentes)
+  - 03-infrastructure (17 agentes)
+  - 04-quality-security (16 agentes)
+  - 05-data-ai (13 agentes)
+  - 06-developer-experience (15 agentes)
+  - 07-specialized-domains (13 agentes)
+  - 08-business-product (12 agentes)
+  - 09-meta-orchestration (11 agentes)
+  - 10-research-analysis (8 agentes)
+
+### Artículo sobre Planificación de Tareas
+- **URL:** https://towardsdatascience.com/how-agents-plan-tasks-with-to-do-lists/
+- **Tema:** Cómo los agentes planifican tareas usando listas de To-Do
+- **Autor:** Kenneth Leung (23 Dic 2025)
+- **Conceptos clave:**
+  - To-do lists para agentes multi-step
+  - LangChain TodoListMiddleware
+  - 4 componentes clave: Todo item, Lista, Tool, System prompt update
+
+---
+
+## Enlaces Directos (Markdown)
+
+[VoltAgent - 144 Claude Code Subagents](https://github.com/VoltAgent/awesome-claude-code-subagents)
+
+[How Agents Plan Tasks with To-Do Lists - Kenneth Leung](https://towardsdatascience.com/how-agents-plan-tasks-with-to-do-lists/)
+
+---
+
+## Conceptos Aprendidos
+
+### 1. Dynamic Discovery
+- Auto-scan de carpetas para detectar agentes disponibles
+- El orquestador escanea antes de rutear
+
+### 2. Orchestration Patterns
+- Sequential execution (A → B → C)
+- Parallel processing (A, B, C simultáneamente)
+- Pipeline patterns (output de uno alimenta al siguiente)
+- Hierarchical delegation (dividir en subtasks más simples)
+
+### 3. Agent Routing
+- **Rule-based:** Keywords simples ("commit" → git)
+- **Intent-based:** Por objetivo del usuario
+- **Semantic:** Por significado, no palabras
+- **LLM-based:** Razonamiento complejo para routing
+
+### 4. Task Decomposition (To-Do Lists)
+Del artículo de Kenneth Leung:
+- **Todo item:** `{content: string, status: pending|in_progress|completed}`
+- **State:** Lista de todos items para tracking
+- **Tool:** write_todos para actualizar la lista
+- **System prompt:** Guía al agente cuándo usar la tool
+
+### 5. Planning Agent Components
+```
+1. ANALYZE → Entender qué pide el usuario
+2. DISCOVER → Escanear agentes disponibles
+3. PLAN → Dividir en tasks con dependencias
+4. ROUTE → Seleccionar agente correcto
+5. EXECUTE → Ejecutar
+6. AGGREGATE → Recoger resultados
+```
+
+---
+
+## Estructura de mi Proyecto
+
+```
+.opencode/
+├── agents-old/                ← Mis agentes originales (backup)
+│   ├── agent-organizer.md
+│   ├── orchestrator.md
+│   ├── core.md
+│   └── subagent/
+│       ├── git-agent.md
+│       └── context-updater.md
+
+agents/                       ← 144 agentes descargados de VoltAgent
+├── 01-core-development/       (11)
+├── 02-language-specialists/   (31)
+├── 03-infrastructure/         (17)
+├── 04-quality-security/      (16)
+├── 05-data-ai/               (13)
+├── 06-developer-experience/    (15)
+├── 07-specialized-domains/    (13)
+├── 08-business-product/        (12)
+├── 09-meta-orchestration/     (11)
+└── 10-research-analysis/     (8)
+```
+
+**Nota:** Ahora uso `agents/` como la carpeta principal de agentes. Los agentes originales están en `agents-old/`.
+.opencode/
+├── agents/
+│   ├── agent-organizer.md     ← Core (basado en VoltAgent)
+│   ├── orchestrator.md         ← Mi orchestrator original
+│   └── subagent/
+│       ├── git-agent.md
+│       └── context-updater.md
+├── skills/
+│   ├── agent-browser/
+│   ├── conventional-commits/
+│   ├── find-skills/
+│   └── rtk-token-optimizer/
+├── core.md
+└── plugins.md
+
+agents-git/                    ← 144 agentes descargados
+├── 01-core-development/       (11)
+├── 02-language-specialists/   (31)
+├── 03-infrastructure/         (17)
+├── 04-quality-security/       (16)
+├── 05-data-ai/                (13)
+├── 06-developer-experience/    (15)
+├── 07-specialized-domains/    (13)
+├── 08-business-product/       (12)
+├── 09-meta-orchestration/     (11)
+└── 10-research-analysis/     (8)
+
+context/                        ← Documentación de contexto
+├── workflow-and-git.md
+├── tech-and-architecture.md
+├── api-and-data.md
+├── mcp-and-tooling.md
+├── agents.md
+├── plugins.md
+└── pending-updates.md
+
+.githooks/
+├── commit-msg
+├── post-push.bat
+└── run-pending.ps1
+```
+
+---
+
+## Configuración de Git
+
+- Alias personalizado: `git push-context` (push + actualiza pending)
+- Hooks en `.githooks/` para Windows
+
+---
+
+## Cambios realizados (2026-05-10)
+
+### Reestructuración de carpetas
+- `.opencode/agents/` → `.opencode/agents-old/` (backup de mis agentes originales)
+- `agents-git/` → `agents/` (ahora es la carpeta principal)
+
+### Próximos pasos
+- Actualizar core.md para apuntar a `agents/` en lugar de `.opencode/agents/`
+- El orquestador de VoltAgent en `agents/09-meta-orchestration/` será el nuevo core
+
+---
+
+## Fecha de inicio del proyecto
+2026-05-10
