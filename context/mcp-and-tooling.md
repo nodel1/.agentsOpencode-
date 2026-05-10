@@ -14,11 +14,22 @@
 | Skill | Purpose | Use when |
 |-------|---------|----------|
 | `web-quality-audit` | Comprehensive quality review | "Audit my site", "Quality review" |
-| `performance` | Loading speed, runtime efficiency | "Optimize performance", "Speed up" |
+| `performance` | Loading speed optimization | "Optimize performance", "Speed up" |
 | `core-web-vitals` | LCP, INP, CLS optimizations | "Improve Core Web Vitals", "Fix LCP" |
 | `accessibility` | WCAG compliance, a11y | "Improve accessibility", "WCAG audit" |
 | `seo` | Search engine optimization | "Optimize for SEO", "Meta tags" |
 | `best-practices` | Security, modern APIs | "Apply best practices", "Security audit" |
+
+### Vercel Agent Skills (vercel-labs/agent-skills)
+
+| Skill | Purpose | Use when |
+|-------|---------|----------|
+| `vercel-react-best-practices` | React/Next.js optimization | "Optimize React", "Performance review" |
+| `web-design-guidelines` | UI audit, 100+ rules | "Review UI", "Check accessibility" |
+| `vercel-react-native-skills` | React Native best practices | "Build React Native", "Mobile optimization" |
+| `vercel-react-view-transitions` | View Transition API | "Add page transitions", "Animate views" |
+| `vercel-composition-patterns` | React composition | "Refactor components", "Clean API" |
+| `deploy-to-vercel` | Deploy to Vercel | "Deploy my app", "Push live" |
 
 ## How Skills Work
 

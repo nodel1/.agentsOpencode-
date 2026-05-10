@@ -32,19 +32,20 @@ Documentación de todas las herramientas, repos y artículos usados para crear m
 
 ---
 
-## Web Quality Skills
+## Vercel Agent Skills
 
 ### Repositorio
-- **URL:** https://github.com/addyosmani/web-quality-skills
-- **Autor:** Addy Osmani
-- **Stars:** 1.9k
-- **Skills incluidas (6):**
-  - `web-quality-audit` - Comprehensive quality review
-  - `performance` - Loading speed optimization
-  - `core-web-vitals` - LCP, INP, CLS specifics
-  - `accessibility` - WCAG compliance
-  - `seo` - Search engine optimization
-  - `best-practices` - Security, modern APIs
+- **URL:** https://github.com/vercel-labs/agent-skills
+- **Stars:** 26.4k
+- **Forks:** 2.4k
+- **Skills incluidas (7):**
+  - `vercel-react-best-practices` - React/Next.js optimization (40+ rules)
+  - `web-design-guidelines` - UI audit (100+ rules)
+  - `vercel-react-native-skills` - React Native best practices
+  - `vercel-react-view-transitions` - View Transition API
+  - `vercel-composition-patterns` - React composition patterns
+  - `deploy-to-vercel` - Deploy to Vercel
+  - `vercel-cli-with-tokens` - Vercel CLI integration
 
 ---
 
@@ -55,6 +56,8 @@ Documentación de todas las herramientas, repos y artículos usados para crear m
 [How Agents Plan Tasks with To-Do Lists - Kenneth Leung](https://towardsdatascience.com/how-agents-plan-tasks-with-to-do-lists/)
 
 [Web Quality Skills - Addy Osmani](https://github.com/addyosmani/web-quality-skills)
+
+[Vercel Agent Skills](https://github.com/vercel-labs/agent-skills)
 
 ---
 
