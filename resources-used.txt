@@ -32,11 +32,29 @@ Documentación de todas las herramientas, repos y artículos usados para crear m
 
 ---
 
+## Web Quality Skills
+
+### Repositorio
+- **URL:** https://github.com/addyosmani/web-quality-skills
+- **Autor:** Addy Osmani
+- **Stars:** 1.9k
+- **Skills incluidas (6):**
+  - `web-quality-audit` - Comprehensive quality review
+  - `performance` - Loading speed optimization
+  - `core-web-vitals` - LCP, INP, CLS specifics
+  - `accessibility` - WCAG compliance
+  - `seo` - Search engine optimization
+  - `best-practices` - Security, modern APIs
+
+---
+
 ## Enlaces Directos (Markdown)
 
 [VoltAgent - 144 Claude Code Subagents](https://github.com/VoltAgent/awesome-claude-code-subagents)
 
 [How Agents Plan Tasks with To-Do Lists - Kenneth Leung](https://towardsdatascience.com/how-agents-plan-tasks-with-to-do-lists/)
+
+[Web Quality Skills - Addy Osmani](https://github.com/addyosmani/web-quality-skills)
 
 ---
 
