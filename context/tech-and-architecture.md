@@ -23,14 +23,14 @@
 
 ```
 /
-├── .githooks/              # Git hooks (commit-msg, post-push)
+├── .githooks/              # Git hooks (commit-msg)
 ├── .opencode/
 │   ├── agents/             # 144+ VoltAgent agents (by category)
 │   ├── subagents/          # Custom subagents (git-agent, task-manager)
-│   ├── skills/             # Skill definitions
+│   ├── skills/             # 17 skills installed
 │   ├── todo.md             # Persistent task board
 │   └── agent-organizer.md  # Main orchestrator
-├── context/                # Context documentation
+├── context/                # Context documentation (4 files)
 └── TODO.md                 # Session scratch pad (ephemeral)
 ```
 

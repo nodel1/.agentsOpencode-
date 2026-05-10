@@ -1,191 +1,149 @@
-# Recursos y Herramientas para mi Proyecto de Agentes OpenCode
+# Resources Used
 
-Documentación de todas las herramientas, repos y artículos usados para crear mi sistema de agentes.
+Documentation of all tools, repositories, and articles used to build this agent system.
 
 ---
 
-## Enlaces Principales
+## Main Repositories
 
-### Repositorio de Subagents
+### VoltAgent - 144 Claude Code Subagents
 - **URL:** https://github.com/VoltAgent/awesome-claude-code-subagents
-- **Contenido:** 144 subagents organizados en 10 categorías
-- **Categorías:**
-  - 01-core-development (11 agentes)
-  - 02-language-specialists (31 agentes)
-  - 03-infrastructure (17 agentes)
-  - 04-quality-security (16 agentes)
-  - 05-data-ai (13 agentes)
-  - 06-developer-experience (15 agentes)
-  - 07-specialized-domains (13 agentes)
-  - 08-business-product (12 agentes)
-  - 09-meta-orchestration (11 agentes)
-  - 10-research-analysis (8 agentes)
-
-### Artículo sobre Planificación de Tareas
-- **URL:** https://towardsdatascience.com/how-agents-plan-tasks-with-to-do-lists/
-- **Tema:** Cómo los agentes planifican tareas usando listas de To-Do
-- **Autor:** Kenneth Leung (23 Dic 2025)
-- **Conceptos clave:**
-  - To-do lists para agentes multi-step
-  - LangChain TodoListMiddleware
-  - 4 componentes clave: Todo item, Lista, Tool, System prompt update
-
----
-
-## Vercel Agent Skills
-
-### Repositorio
-- **URL:** https://github.com/vercel-labs/agent-skills
+- **Content:** 144 subagents in 10 categories
 - **Stars:** 26.4k
-- **Forks:** 2.4k
-- **Skills incluidas (7):**
-  - `vercel-react-best-practices` - React/Next.js optimization (40+ rules)
-  - `web-design-guidelines` - UI audit (100+ rules)
-  - `vercel-react-native-skills` - React Native best practices
-  - `vercel-react-view-transitions` - View Transition API
-  - `vercel-composition-patterns` - React composition patterns
-  - `deploy-to-vercel` - Deploy to Vercel
-  - `vercel-cli-with-tokens` - Vercel CLI integration
+
+### Web Quality Skills - Addy Osmani
+- **URL:** https://github.com/addyosmani/web-quality-skills
+- **Content:** 6 skills (audit, performance, core-web-vitals, accessibility, seo, best-practices)
+- **Stars:** 1.9k
+
+### Vercel Agent Skills
+- **URL:** https://github.com/vercel-labs/agent-skills
+- **Content:** 7 skills (react-best-practices, web-design-guidelines, react-native, view-transitions, composition-patterns, deploy-to-vercel, cli-with-tokens)
+- **Stars:** 26.4k
 
 ---
 
-## Enlaces Directos (Markdown)
+## Articles
+
+### How Agents Plan Tasks with To-Do Lists
+- **URL:** https://towardsdatascience.com/how-agents-plan-tasks-with-to-do-lists/
+- **Author:** Kenneth Leung (23 Dec 2025)
+- **Key Concepts:**
+  - To-do lists for multi-step agents
+  - LangChain TodoListMiddleware
+  - 4 key components: Todo item, List, Tool, System prompt update
+
+---
+
+## Links (Markdown)
 
 [VoltAgent - 144 Claude Code Subagents](https://github.com/VoltAgent/awesome-claude-code-subagents)
-
-[How Agents Plan Tasks with To-Do Lists - Kenneth Leung](https://towardsdatascience.com/how-agents-plan-tasks-with-to-do-lists/)
 
 [Web Quality Skills - Addy Osmani](https://github.com/addyosmani/web-quality-skills)
 
 [Vercel Agent Skills](https://github.com/vercel-labs/agent-skills)
 
+[How Agents Plan Tasks with To-Do Lists - Kenneth Leung](https://towardsdatascience.com/how-agents-plan-tasks-with-to-do-lists/)
+
 ---
 
-## Conceptos Aprendidos
+## Concepts Learned
 
 ### 1. Dynamic Discovery
-- Auto-scan de carpetas para detectar agentes disponibles
-- El orquestador escanea antes de rutear
+- Auto-scan folders to detect available agents
+- Orchestrator scans before routing
 
 ### 2. Orchestration Patterns
 - Sequential execution (A → B → C)
-- Parallel processing (A, B, C simultáneamente)
-- Pipeline patterns (output de uno alimenta al siguiente)
-- Hierarchical delegation (dividir en subtasks más simples)
+- Parallel processing (A, B, C simultaneously)
+- Pipeline patterns (output feeds next)
+- Hierarchical delegation (split into simpler subtasks)
 
 ### 3. Agent Routing
-- **Rule-based:** Keywords simples ("commit" → git)
-- **Intent-based:** Por objetivo del usuario
-- **Semantic:** Por significado, no palabras
-- **LLM-based:** Razonamiento complejo para routing
+- **Rule-based:** Simple keywords ("commit" → git)
+- **Intent-based:** By user goal
+- **Semantic:** By meaning, not words
+- **LLM-based:** Complex reasoning for routing
 
 ### 4. Task Decomposition (To-Do Lists)
-Del artículo de Kenneth Leung:
+From Kenneth Leung's article:
 - **Todo item:** `{content: string, status: pending|in_progress|completed}`
-- **State:** Lista de todos items para tracking
-- **Tool:** write_todos para actualizar la lista
-- **System prompt:** Guía al agente cuándo usar la tool
+- **State:** List of todos for tracking
+- **Tool:** write_todos to update list
+- **System prompt:** Guides agent when to use tool
 
 ### 5. Planning Agent Components
 ```
-1. ANALYZE → Entender qué pide el usuario
-2. DISCOVER → Escanear agentes disponibles
-3. PLAN → Dividir en tasks con dependencias
-4. ROUTE → Seleccionar agente correcto
-5. EXECUTE → Ejecutar
-6. AGGREGATE → Recoger resultados
+1. ANALYZE → Understand user's request
+2. DISCOVER → Scan available agents
+3. PLAN → Split into tasks with dependencies
+4. ROUTE → Select correct agent
+5. EXECUTE → Execute
+6. AGGREGATE → Collect results
 ```
 
 ---
 
-## Estructura de mi Proyecto
+## Project Structure
 
 ```
 .opencode/
-├── agents-old/                ← Mis agentes originales (backup)
-│   ├── agent-organizer.md
-│   ├── orchestrator.md
-│   ├── core.md
-│   └── subagent/
-│       ├── git-agent.md
-│       └── context-updater.md
-
-agents/                       ← 144 agentes descargados de VoltAgent
-├── 01-core-development/       (11)
-├── 02-language-specialists/   (31)
-├── 03-infrastructure/         (17)
-├── 04-quality-security/      (16)
-├── 05-data-ai/               (13)
-├── 06-developer-experience/    (15)
-├── 07-specialized-domains/    (13)
-├── 08-business-product/        (12)
-├── 09-meta-orchestration/     (11)
-└── 10-research-analysis/     (8)
-```
-
-**Nota:** Ahora uso `agents/` como la carpeta principal de agentes. Los agentes originales están en `agents-old/`.
-.opencode/
-├── agents/
-│   ├── agent-organizer.md     ← Core (basado en VoltAgent)
-│   ├── orchestrator.md         ← Mi orchestrator original
-│   └── subagent/
-│       ├── git-agent.md
-│       └── context-updater.md
-├── skills/
+├── agents/                    # 144+ VoltAgent agents
+│   ├── 01-core-development/  (11)
+│   ├── 02-language-specialists/ (31)
+│   ├── 03-infrastructure/    (17)
+│   ├── 04-quality-security/  (16)
+│   ├── 05-data-ai/           (13)
+│   ├── 06-developer-experience/ (15)
+│   ├── 07-specialized-domains/ (13)
+│   ├── 08-business-product/  (12)
+│   ├── 09-meta-orchestration/ (11)
+│   └── 10-research-analysis/ (8)
+├── subagents/                 # Custom subagents
+│   ├── git-agent.md          # Git operations + context updates
+│   └── task-manager.md       # TODO system management
+├── skills/                    # 17 skills installed
 │   ├── agent-browser/
 │   ├── conventional-commits/
 │   ├── find-skills/
-│   └── rtk-token-optimizer/
-├── core.md
-└── plugins.md
+│   ├── rtk-token-optimizer/
+│   ├── accessibility/
+│   ├── best-practices/
+│   ├── core-web-vitals/
+│   ├── performance/
+│   ├── seo/
+│   ├── web-quality-audit/
+│   ├── deploy-to-vercel/
+│   ├── vercel-cli-with-tokens/
+│   ├── vercel-composition-patterns/
+│   ├── vercel-react-best-practices/
+│   ├── vercel-react-native-skills/
+│   ├── vercel-react-view-transitions/
+│   └── web-design-guidelines/
+├── todo.md                    # Persistent task board
+└── agent-organizer.md         # Main orchestrator
 
-agents-git/                    ← 144 agentes descargados
-├── 01-core-development/       (11)
-├── 02-language-specialists/   (31)
-├── 03-infrastructure/         (17)
-├── 04-quality-security/       (16)
-├── 05-data-ai/                (13)
-├── 06-developer-experience/    (15)
-├── 07-specialized-domains/    (13)
-├── 08-business-product/       (12)
-├── 09-meta-orchestration/     (11)
-└── 10-research-analysis/     (8)
+context/                       # Context documentation
+├── agents.md                 # Agent configuration
+├── tech-and-architecture.md  # Project structure
+├── mcp-and-tooling.md        # Skills and tools
+└── workflow-and-git.md       # Git workflow and TODO system
 
-context/                        ← Documentación de contexto
-├── workflow-and-git.md
-├── tech-and-architecture.md
-├── api-and-data.md
-├── mcp-and-tooling.md
-├── agents.md
-├── plugins.md
-└── pending-updates.md
+.githooks/                      # Git hooks
+└── commit-msg                 # Conventional commits validator
 
-.githooks/
-├── commit-msg
-├── post-push.bat
-└── run-pending.ps1
+TODO.md                        # Session scratch pad
 ```
 
 ---
 
-## Configuración de Git
+## Git Configuration
 
-- Alias personalizado: `git push-context` (push + actualiza pending)
-- Hooks en `.githooks/` para Windows
-
----
-
-## Cambios realizados (2026-05-10)
-
-### Reestructuración de carpetas
-- `.opencode/agents/` → `.opencode/agents-old/` (backup de mis agentes originales)
-- `agents-git/` → `agents/` (ahora es la carpeta principal)
-
-### Próximos pasos
-- Actualizar core.md para apuntar a `agents/` en lugar de `.opencode/agents/`
-- El orquestador de VoltAgent en `agents/09-meta-orchestration/` será el nuevo core
+- Conventional commits format enforced via `.githooks/commit-msg`
+- Auto-update context after push (via git-agent)
 
 ---
 
-## Fecha de inicio del proyecto
+## Project Start Date
+
 2026-04-22

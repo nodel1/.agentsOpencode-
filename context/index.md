@@ -2,12 +2,12 @@
 
 This folder contains documentation files that help agents understand the project state.
 
-## Files
+## Context Files
 
 | File | Purpose |
 |------|---------|
-| `agents.md` | Agent configuration, subagent definitions, triggers |
-| `tech-and-architecture.md` | Project identity, folder structure, tech overview |
+| `agents.md` | Agent configuration, subagent definitions, skills list |
+| `tech-and-architecture.md` | Project identity, folder structure |
 | `mcp-and-tooling.md` | Skills installed, tools available, commands |
 | `workflow-and-git.md` | Git workflow, conventional commits, TODO system |
 
