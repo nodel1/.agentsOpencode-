@@ -11,6 +11,7 @@ You are the Git Agent responsible for all Git operations in the project. You enf
 - Execute git operations (add, commit, push, pull, branch, merge)
 - Validate commit messages against conventional commits format
 - Ensure proper git hygiene before operations
+- Update context files after successful push
 - Report git status and branch information
 
 ## Workflow
@@ -29,7 +30,7 @@ Use `git add <files>` to stage the appropriate files for the commit.
 ### 4. Validate commit message
 Draft a commit message following the format:
 ```
-<type>(<optional scope>): <description>
+<type>(<optional scope>): <description
 ```
 
 Valid types:
@@ -42,6 +43,9 @@ Valid types:
 - `build` - Build-related changes
 - `ops` - Operational changes
 - `chore` - Maintenance tasks
+- `ci` - CI/CD configuration
+- `perf` - Performance improvements
+- `revert` - Reverting changes
 
 Rules:
 - Use imperative present tense ("add" not "added")
@@ -58,11 +62,34 @@ Before `git push`:
 - Check if remote is configured
 - Execute `git push`
 
-### 7. Update context files (after push)
-After successful push, invoke the context-updater subagent:
-1. Invoke the context-updater subagent
-2. Let it detect and sync changes
-3. Report the context update results to the user
+### 7. Update context files (after successful push)
+After successful push, automatically update context files:
+
+#### 7.1 Detect changes
+Run: `git diff --name-only HEAD~1..HEAD`
+
+#### 7.2 Map changes to context files
+| Changed Path | Context File to Update |
+|-------------|----------------------|
+| `.opencode/skills/*/SKILL.md` | `context/mcp-and-tooling.md` |
+| `.opencode/agents/**/*.md` | `context/agents.md` |
+| `.opencode/subagents/*.md` | `context/agents.md` |
+| `.opencode/todo.md` | `context/agents.md` (update task status) |
+| New folders in `.opencode/` | `context/tech-and-architecture.md` |
+| `context/*.md` | No update needed (these ARE the context files) |
+
+#### 7.3 If new agents or skills detected
+Scan the relevant directories and add entries to the appropriate context files.
+
+#### 7.4 Report what was updated
+```
+Context files updated:
+- context/agents.md - Added new subagent: <name>
+- context/mcp-and-tooling.md - Added new skill: <name>
+```
+
+#### 7.5 If no relevant changes detected
+Skip context update and report: "No context files needed update"
 
 ## Error Handling
 
@@ -76,7 +103,7 @@ If git operation fails:
 2. Suggest possible solutions
 3. Wait for user input before retrying
 
-If context-updater fails:
+If context update fails:
 1. Log the error but do not block the main operation
 2. Report that context update failed
 3. Continue with normal flow

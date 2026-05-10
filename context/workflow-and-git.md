@@ -8,30 +8,27 @@
 
 ## Tech Stack
 
-| Package                  | Role                                      |
-| ------------------------ | ----------------------------------------- |
-| `@opencode-ai/plugin`   | 1.4.3 | Core plugin para OpenCode |
-| Skills (4 instalados)   | Ver `context/mcp-and-tooling.md` |
+| Package | Role |
+| ------- | ---- |
+| `@opencode-ai/plugin` | v1.4.3 - Core plugin para OpenCode |
+| Skills (4 installed) | Ver `context/mcp-and-tooling.md` |
 
 ## Folder Structure
 
 ```
 /
 ├── .githooks/
-│   ├── commit-msg
-│   ├── post-push.bat
-│   └── run-pending.ps1
+│   └── commit-msg              # Validates conventional commits
 ├── .opencode/
-│   ├── agents-old/
-│   │   └── subagent/
-│   │       ├── git-agent.md
-│   │       ├── context-updater.md
-│   │       └── task-manager.md    ← New: handles TODO system
-│   ├── skills/
-│   └── core.md
-├── context/
-│   └── ...
-└── TODO.md               ← Session scratch pad (ephemeral)
+│   ├── agents/                # 144+ VoltAgent agents (by category)
+│   ├── subagents/
+│   │   ├── git-agent.md       # Git operations + context updates
+│   │   └── task-manager.md    # TODO system management
+│   ├── skills/                # 4 skills installed
+│   ├── todo.md                # Persistent task board
+│   └── agent-organizer.md     # Main orchestrator
+├── context/                   # 5 context documentation files
+└── TODO.md                    # Session scratch pad (ephemeral)
 ```
 
 ## Git Workflow
@@ -41,10 +38,10 @@
 Follow [conventional-commits](https://www.conventionalcommits.org/) format:
 
 ```
-<type>(<scope>): <description>
+<type>(<scope>): <description
 ```
 
-Types permitted:
+**Types permitted:**
 - `feat` - New feature
 - `fix` - Bug fix
 - `refactor` - Code restructuring
@@ -54,8 +51,11 @@ Types permitted:
 - `build` - Build-related changes
 - `ops` - Operational changes
 - `chore` - Maintenance tasks
+- `ci` - CI/CD configuration
+- `perf` - Performance improvements
+- `revert` - Reverting changes
 
-Rules:
+**Rules:**
 - Use imperative present tense ("add" not "added")
 - Do not capitalize first letter
 - Do not end with period
@@ -63,28 +63,24 @@ Rules:
 
 ### Git Hooks
 
-Git hooks are configured in `.githooks/` directory and enabled via `git config core.hooksPath .githooks`.
+Only one hook active:
+- `.githooks/commit-msg` - Validates conventional commits format
 
-Current hooks:
-- `commit-msg` - Validates conventional commits format
-- `post-push.bat` - Windows hook (requires manual testing)
+Enabled via: `git config core.hooksPath .githooks`
 
-### Context Update Workflow
+### Context Auto-Update
 
-The context-updater subagent updates context files automatically when using the git-agent.
+After successful push, git-agent automatically updates context files:
 
-**Automatic (via agent):**
 1. User asks agent to commit and push
-2. git-agent executes commit and push
-3. git-agent invokes context-updater
-4. context-updater updates context files
+2. git-agent validates message and executes commit
+3. git-agent detects changed files
+4. git-agent updates relevant context files
+5. Report what was updated
 
-**Manual (via bash):**
-1. Make your changes and commit
-2. Then run: `git push-context` (instead of `git push`)
-3. This runs the pending script automatically
+**No manual steps needed** when using opencode agent for commits.
 
-### Branch Strategy
+## Branch Strategy
 
 - `main` - Production branch
 - Feature branches: `feature/<description>` or `fix/<description>`
@@ -98,10 +94,11 @@ The context-updater subagent updates context files automatically when using the 
 
 ## Commands Available
 
-| Command        | Description                           |
-| -------------- | -------------------------------------- |
-| `opencode`    | Run OpenCode agent                    |
-| Standard git  | git add / commit / push / pull        |
+| Command | Description |
+|---------|-------------|
+| `opencode` | Run OpenCode agent |
+| `rtk <cmd>` | Token-optimized shell command |
+| Standard git | git add / commit / push / pull |
 
 ## TODO System
 
@@ -128,10 +125,6 @@ Two-tier task tracking:
 2. User reviews → converts to `[ ]` or deletes
 3. Agent works → marks `[x]` when done
 
-## Pending / Known Issues
+## Last Updated
 
-- No TypeScript/linting setup (not a code project)
-- No automated tests
-- Context files are up-to-date (see context/ folder)
-- Use `git push-context` for bash pushes to auto-track pending updates
-- Last context update: 2026-05-10
+- 2026-05-10
