@@ -6,19 +6,22 @@ This folder contains specialized skills that extend agent capabilities.
 
 | Source | Count | Skills |
 |--------|-------|--------|
-| Built-in OpenCode | 4 | agent-browser, conventional-commits, find-skills, rtk-token-optimizer |
+| vercel-labs/agent-browser | 1 | agent-browser |
+| rtk-ai/rtk | 1 | rtk-token-optimizer |
+| skills.sh | 1 | find-skills |
 | addyosmani/web-quality-skills | 6 | web-quality-audit, performance, core-web-vitals, accessibility, seo, best-practices |
 | vercel-labs/agent-skills | 7 | vercel-react-best-practices, web-design-guidelines, vercel-react-native-skills, vercel-react-view-transitions, vercel-composition-patterns, deploy-to-vercel, vercel-cli-with-tokens |
+| Built-in OpenCode | 1 | conventional-commits |
 
 ## Available Skills
 
-### Core Skills
-| Skill | Purpose | Trigger |
-|-------|---------|---------|
-| `agent-browser` | Browser automation | "open website", "scrape data", "test web app" |
-| `conventional-commits` | Git commit standards | Git operations |
-| `find-skills` | Discover/install skills | "find a skill for X" |
-| `rtk-token-optimizer` | Token optimization (60-90% savings) | All shell commands (use `rtk` prefix) |
+### Core Skills (from external repos)
+| Skill | Source | Purpose | Trigger |
+|-------|--------|---------|---------|
+| `agent-browser` | [vercel-labs](https://github.com/vercel-labs/agent-browser) (32K stars) | Browser automation | "open website", "scrape data" |
+| `rtk-token-optimizer` | [rtk-ai/rtk](https://github.com/rtk-ai/rtk) (37K stars) | Token optimization (60-90% savings) | All shell commands |
+| `find-skills` | [skills.sh](https://skills.sh/) | Discover/install skills | "find a skill for X" |
+| `conventional-commits` | Built-in | Git commit standards | Git operations |
 
 ### Web Quality Skills
 | Skill | Purpose | Trigger |

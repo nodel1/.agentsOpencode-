@@ -129,10 +129,10 @@ After installation:
 
 | Skill | Source | Purpose |
 |-------|--------|---------|
-| agent-browser | Built-in | Browser automation |
+| agent-browser | [vercel-labs](https://github.com/vercel-labs/agent-browser) | Browser automation |
+| rtk-token-optimizer | [rtk-ai](https://github.com/rtk-ai/rtk) | Token optimization |
+| find-skills | [skills.sh](https://skills.sh/) | Discover skills |
 | conventional-commits | Built-in | Git commit standards |
-| find-skills | Built-in | Discover skills |
-| rtk-token-optimizer | Built-in | Token optimization |
 | web-quality-audit | addyosmani | Full quality review |
 | performance | addyosmani | Speed optimization |
 | core-web-vitals | addyosmani | LCP, INP, CLS |

@@ -11,15 +11,33 @@ Documentation of all tools, repositories, and articles used to build this agent 
 - **Content:** 144 subagents in 10 categories
 - **Stars:** 26.4k
 
+### agent-browser - Browser Automation for AI Agents
+- **URL:** https://github.com/vercel-labs/agent-browser
+- **Author:** Vercel Labs
+- **Stars:** 32k
+- **Purpose:** Fast browser automation CLI for AI agents (Rust-based)
+- **Install:** `npm i -g agent-browser && agent-browser install`
+
+### RTK - Rust Token Killer
+- **URL:** https://github.com/rtk-ai/rtk
+- **Author:** rtk-ai
+- **Stars:** 37k
+- **Purpose:** CLI proxy that reduces LLM token consumption by 60-90%
+- **Install:** `cargo install --git https://github.com/rtk-ai/rtk`
+
+### skills.sh - Agent Skills Marketplace
+- **URL:** https://skills.sh/
+- **Purpose:** Package manager for agent skills
+
 ### Web Quality Skills - Addy Osmani
 - **URL:** https://github.com/addyosmani/web-quality-skills
-- **Content:** 6 skills (audit, performance, core-web-vitals, accessibility, seo, best-practices)
 - **Stars:** 1.9k
+- **Skills:** audit, performance, core-web-vitals, accessibility, seo, best-practices
 
 ### Vercel Agent Skills
 - **URL:** https://github.com/vercel-labs/agent-skills
-- **Content:** 7 skills (react-best-practices, web-design-guidelines, react-native, view-transitions, composition-patterns, deploy-to-vercel, cli-with-tokens)
 - **Stars:** 26.4k
+- **Skills:** react-best-practices, web-design-guidelines, react-native, view-transitions, composition-patterns, deploy-to-vercel, cli-with-tokens
 
 ---
 
