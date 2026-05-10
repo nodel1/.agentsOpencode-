@@ -167,4 +167,4 @@ context/                        ← Documentación de contexto
 ---
 
 ## Fecha de inicio del proyecto
-2026-05-10
+2026-04-22

@@ -9,6 +9,17 @@
 | `find-skills` | Discover and install new skills |
 | `rtk-token-optimizer` | Reduce LLM token consumption by 60-90% |
 
+### Web Quality Skills (addyosmani/web-quality-skills)
+
+| Skill | Purpose | Use when |
+|-------|---------|----------|
+| `web-quality-audit` | Comprehensive quality review | "Audit my site", "Quality review" |
+| `performance` | Loading speed, runtime efficiency | "Optimize performance", "Speed up" |
+| `core-web-vitals` | LCP, INP, CLS optimizations | "Improve Core Web Vitals", "Fix LCP" |
+| `accessibility` | WCAG compliance, a11y | "Improve accessibility", "WCAG audit" |
+| `seo` | Search engine optimization | "Optimize for SEO", "Meta tags" |
+| `best-practices` | Security, modern APIs | "Apply best practices", "Security audit" |
+
 ## How Skills Work
 
 ### rtk-token-optimizer

@@ -6,22 +6,13 @@ Project-wide tasks that persist across sessions. Agents can propose work, users 
 
 ## Task Categories
 
-### High Priority
+## Completed
 - [x] Clean up context files | Agent: opencode | Priority: high | Completed: 2026-05-10
 - [x] Streamline from 8 to 4 context files | Agent: opencode | Priority: high | Completed: 2026-05-10
+- [x] Create task-manager agent | Agent: opencode | Priority: medium | Completed: 2026-05-10
+- [x] Integrate web-quality-skills from addyosmani | Agent: opencode | Priority: medium | Completed: 2026-05-10
 
 ## Proposed
-<!-- Agents can propose tasks here -->
-
-### Medium Priority
-- [x] Create task-manager agent | Agent: opencode | Priority: medium | Completed: 2026-05-10
-
-### Low Priority
-<!-- Add low priority tasks here -->
-
----
-
-## Proposed (Awaiting Review)
 <!-- [PROPOSED] tasks go here - user reviews and converts to pending or deletes -->
 
 ---
