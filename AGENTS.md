@@ -176,27 +176,42 @@ After installation:
 2. Document source in `resources-used.txt`
 3. Move skill folder if needed (skills go in `.opencode/skills/`)
 
-## Skills Available (17)
+## Skills Available (31)
 
 | Skill | Source | Purpose |
 |-------|--------|---------|
 | agent-browser | [vercel-labs](https://github.com/vercel-labs/agent-browser) | Browser automation |
-| rtk-token-optimizer | [rtk-ai](https://github.com/rtk-ai/rtk) | Token optimization |
+| api-design | [affaan-m](https://github.com/affaan-m/everything-claude-code) | API design patterns |
+| backend-patterns | [affaan-m](https://github.com/affaan-m/everything-claude-code) | Backend architecture |
+| best-practices | [addyosmani](https://github.com/addyosmani/web-quality-skills) | Security, APIs |
+| click-path-audit | [affaan-m](https://github.com/affaan-m/everything-claude-code) | UI interaction bugs |
+| codebase-onboarding | [affaan-m](https://github.com/affaan-m/everything-claude-code) | Dev onboarding guides |
+| code-tour | [affaan-m](https://github.com/affaan-m/everything-claude-code) | Interactive code tours |
+| conventional-commits | [skills.sh](https://skills.sh/) | Git commit standards |
+| core-web-vitals | [addyosmani](https://github.com/addyosmani/web-quality-skills) | LCP, INP, CLS |
+| deep-research | [affaan-m](https://github.com/affaan-m/everything-claude-code) | Research & analysis |
+| deployment-patterns | [affaan-m](https://github.com/affaan-m/everything-claude-code) | Deployment strategies |
+| deploy-to-vercel | [vercel-labs](https://github.com/vercel-labs/agent-skills) | Vercel deployment |
+| django-patterns | [affaan-m](https://github.com/affaan-m/everything-claude-code) | Django architecture |
+| docker-patterns | [affaan-m](https://github.com/affaan-m/everything-claude-code) | Container workflows |
 | find-skills | [skills.sh](https://skills.sh/) | Discover skills |
-| conventional-commits | Built-in | Git commit standards |
-| web-quality-audit | addyosmani | Full quality review |
-| performance | addyosmani | Speed optimization |
-| core-web-vitals | addyosmani | LCP, INP, CLS |
-| accessibility | addyosmani | WCAG compliance |
-| seo | addyosmani | SEO optimization |
-| best-practices | addyosmani | Security, APIs |
-| vercel-react-best-practices | vercel-labs | React/Next.js |
-| web-design-guidelines | vercel-labs | UI audit |
-| vercel-react-native-skills | vercel-labs | React Native |
-| vercel-react-view-transitions | vercel-labs | View transitions |
-| vercel-composition-patterns | vercel-labs | React patterns |
-| deploy-to-vercel | vercel-labs | Deploy to Vercel |
-| vercel-cli-with-tokens | vercel-labs | Vercel CLI |
+| flutter-dart-code-review | [affaan-m](https://github.com/affaan-m/everything-claude-code) | Flutter review |
+| frontend-patterns | [affaan-m](https://github.com/affaan-m/everything-claude-code) | Frontend architecture |
+| git-workflow | [affaan-m](https://github.com/affaan-m/everything-claude-code) | Git strategies |
+| laravel-patterns | [affaan-m](https://github.com/affaan-m/everything-claude-code) | Laravel architecture |
+| nestjs-patterns | [affaan-m](https://github.com/affaan-m/everything-claude-code) | NestJS patterns |
+| nextjs-turbopack | [affaan-m](https://github.com/affaan-m/everything-claude-code) | Next.js optimization |
+| performance | [addyosmani](https://github.com/addyosmani/web-quality-skills) | Speed optimization |
+| rtk-token-optimizer | [rtk-ai](https://github.com/rtk-ai/rtk) | Token optimization |
+| springboot-patterns | [affaan-m](https://github.com/affaan-m/everything-claude-code) | Spring Boot patterns |
+| tdd-workflow | [affaan-m](https://github.com/affaan-m/everything-claude-code) | TDD methodology |
+| vercel-cli-with-tokens | [vercel-labs](https://github.com/vercel-labs/agent-skills) | Vercel CLI |
+| vercel-composition-patterns | [vercel-labs](https://github.com/vercel-labs/agent-skills) | React patterns |
+| vercel-react-best-practices | [vercel-labs](https://github.com/vercel-labs/agent-skills) | React/Next.js |
+| vercel-react-native-skills | [vercel-labs](https://github.com/vercel-labs/agent-skills) | React Native |
+| vercel-react-view-transitions | [vercel-labs](https://github.com/vercel-labs/agent-skills) | View transitions |
+| web-design-guidelines | [vercel-labs](https://github.com/vercel-labs/agent-skills) | UI audit |
+| web-quality-audit | [addyosmani](https://github.com/addyosmani/web-quality-skills) | Full quality review |
 
 ## Last Updated
 

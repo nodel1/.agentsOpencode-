@@ -11,13 +11,13 @@ Documentation of all tools, repositories, and articles used to build this agent 
 - **Content:** 144 subagents in 10 categories
 - **Stars:** 26.4k
 
-### everything-claude-code - Subagent Collection
+### everything-claude-code - Subagent & Skills Collection
 - **URL:** https://github.com/affaan-m/everything-claude-code
 - **Author:** affaan-m
 - **Stars:** 178k
-- **Content:** 55+ subagents including planner, build-error-resolver, doc-updater
+- **Content:** 55+ subagents + 200+ skills
 - **Subagents Added:** planner.md, build-error-resolver.md, doc-updater.md
-- **Documentation:** SKILL-DEVELOPMENT-GUIDE.md, COMMAND-AGENT-MAP.md, SKILL-PLACEMENT-POLICY.md
+- **Skills Added:** git-workflow, codebase-onboarding, tdd-workflow, code-tour, api-design, docker-patterns, click-path-audit, deployment-patterns, deep-research, frontend-patterns, backend-patterns, nextjs-turbopack, django-patterns, laravel-patterns, nestjs-patterns, springboot-patterns, flutter-dart-code-review
 
 ### agent-browser - Browser Automation for AI Agents
 - **URL:** https://github.com/vercel-labs/agent-browser
@@ -40,12 +40,12 @@ Documentation of all tools, repositories, and articles used to build this agent 
 ### Web Quality Skills - Addy Osmani
 - **URL:** https://github.com/addyosmani/web-quality-skills
 - **Stars:** 1.9k
-- **Skills:** audit, performance, core-web-vitals, accessibility, seo, best-practices
+- **Skills:** web-quality-audit, performance, core-web-vitals, best-practices
 
 ### Vercel Agent Skills
 - **URL:** https://github.com/vercel-labs/agent-skills
 - **Stars:** 26.4k
-- **Skills:** react-best-practices, web-design-guidelines, react-native, view-transitions, composition-patterns, deploy-to-vercel, cli-with-tokens
+- **Skills:** vercel-react-best-practices, web-design-guidelines, vercel-react-native-skills, vercel-react-view-transitions, vercel-composition-patterns, deploy-to-vercel, vercel-cli-with-tokens
 
 ---
 
@@ -133,33 +133,55 @@ From Kenneth Leung's article:
 │   └── 10-research-analysis/ (8)
 ├── subagents/                 # Custom subagents
 │   ├── git-agent.md          # Git operations + context updates
-│   └── task-manager.md       # TODO system management
-├── skills/                    # 17 skills installed
+│   ├── task-manager.md       # TODO system management
+│   ├── planner.md            # Feature planning
+│   ├── build-error-resolver.md # Build error fix
+│   └── doc-updater.md        # Documentation updates
+├── skills/                    # 31 skills installed
 │   ├── agent-browser/
-│   ├── conventional-commits/
-│   ├── find-skills/
-│   ├── rtk-token-optimizer/
-│   ├── accessibility/
+│   ├── api-design/
+│   ├── backend-patterns/
 │   ├── best-practices/
+│   ├── click-path-audit/
+│   ├── codebase-onboarding/
+│   ├── code-tour/
+│   ├── conventional-commits/
 │   ├── core-web-vitals/
-│   ├── performance/
-│   ├── seo/
-│   ├── web-quality-audit/
+│   ├── deep-research/
+│   ├── deployment-patterns/
 │   ├── deploy-to-vercel/
+│   ├── django-patterns/
+│   ├── docker-patterns/
+│   ├── find-skills/
+│   ├── flutter-dart-code-review/
+│   ├── frontend-patterns/
+│   ├── git-workflow/
+│   ├── laravel-patterns/
+│   ├── nestjs-patterns/
+│   ├── nextjs-turbopack/
+│   ├── performance/
+│   ├── rtk-token-optimizer/
+│   ├── springboot-patterns/
+│   ├── tdd-workflow/
 │   ├── vercel-cli-with-tokens/
 │   ├── vercel-composition-patterns/
 │   ├── vercel-react-best-practices/
 │   ├── vercel-react-native-skills/
 │   ├── vercel-react-view-transitions/
 │   └── web-design-guidelines/
+│   └── web-quality-audit/
+├── docs/
+│   ├── CODEMAPS/             # Human-readable codemaps
+│   └── GUIDES/               # Setup and usage guides
 ├── todo.md                    # Persistent task board
 └── agent-organizer.md         # Main orchestrator
 
-context/                       # Context documentation
-├── agents.md                 # Agent configuration
-├── tech-and-architecture.md  # Project structure
-├── mcp-and-tooling.md        # Skills and tools
-└── workflow-and-git.md       # Git workflow and TODO system
+context/                       # Context documentation for agents
+├── index.md
+├── agents.md
+├── tech-and-architecture.md
+├── mcp-and-tooling.md
+└── workflow-and-git.md
 
 .githooks/                      # Git hooks
 └── commit-msg                 # Conventional commits validator
