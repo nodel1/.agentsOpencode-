@@ -1,14 +1,15 @@
 # .agentsOpencode-
 
-Personal OpenCode agent configuration template with 144+ specialized agents and 17 skills.
+Personal OpenCode agent configuration template with 144+ specialized agents and 31 skills.
 
 ## Features
 
-- **144+ VoltAgent agents** organized by category
-- **17 skills** for web quality, React, and general development
+- **144+ VoltAgent agents** organized by category (10 categories)
+- **31 skills** for web quality, React, deployment, and development patterns
 - **5 custom subagents** for git, tasks, planning, docs, and build errors
 - **Two-tier TODO system** for persistent and session tasks
 - **Conventional commits** enforcement
+- **Dynamic agent discovery** - auto-scans on activation
 
 ## Quick Start
 
@@ -22,9 +23,9 @@ cd your-project
 
 ```
 .opencode/
-├── agents/             # 144+ VoltAgent agents
+├── agents/             # 144+ VoltAgent agents (10 categories)
 ├── subagents/          # Custom: git-agent, task-manager, planner, build-error-resolver, doc-updater
-├── skills/             # 17 skills installed
+├── skills/             # 31 skills installed
 ├── docs/               # Documentation system
 │   ├── CODEMAPS/       # Architecture codemaps
 │   └── GUIDES/         # Setup and usage guides
@@ -32,17 +33,49 @@ cd your-project
 └── agent-organizer.md  # Main orchestrator
 
 context/                # Agent-only documentation
-docs/                   # Human documentation (generated from src/)
+docs/                   # Human documentation
 .githooks/              # Git hooks (commit-msg)
 ```
 
-## Skills Available (17)
+## Skills Available (31)
 
-| Category | Skills |
-|----------|--------|
-| Core (4) | agent-browser, conventional-commits, find-skills, rtk-token-optimizer |
-| Web Quality (6) | web-quality-audit, performance, core-web-vitals, accessibility, seo, best-practices |
-| Vercel (7) | vercel-react-best-practices, web-design-guidelines, vercel-react-native-skills, vercel-react-view-transitions, vercel-composition-patterns, deploy-to-vercel, vercel-cli-with-tokens |
+| Category | Count | Skills |
+|----------|-------|--------|
+| **Core** | 4 | agent-browser, conventional-commits, find-skills, rtk-token-optimizer |
+| **Web Quality** | 4 | web-quality-audit, performance, core-web-vitals, best-practices |
+| **Vercel** | 7 | vercel-react-best-practices, web-design-guidelines, vercel-react-native-skills, vercel-react-view-transitions, vercel-composition-patterns, deploy-to-vercel, vercel-cli-with-tokens |
+| **Development** | 16 | git-workflow, codebase-onboarding, tdd-workflow, code-tour, api-design, docker-patterns, click-path-audit, deployment-patterns, deep-research, frontend-patterns, backend-patterns, nextjs-turbopack, django-patterns, laravel-patterns, nestjs-patterns, springboot-patterns, flutter-dart-code-review |
+
+### Skills by Priority
+
+**ALTA PRIORITY:**
+| Skill | Purpose |
+|-------|---------|
+| git-workflow | Git strategies, branching, conflict resolution |
+| codebase-onboarding | Dev onboarding guides |
+| tdd-workflow | Test-driven development |
+| code-tour | Interactive code tours |
+| api-design | API design patterns |
+| docker-patterns | Container workflows |
+
+**MEDIA PRIORITY:**
+| Skill | Purpose |
+|-------|---------|
+| click-path-audit | UI interaction bugs |
+| deployment-patterns | Deployment strategies |
+| deep-research | Research & analysis |
+| frontend-patterns | Frontend architecture |
+| backend-patterns | Backend architecture |
+
+**FRAMEWORK-SPECIFIC:**
+| Skill | Framework |
+|-------|-----------|
+| nextjs-turbopack | Next.js |
+| django-patterns | Django |
+| laravel-patterns | Laravel |
+| nestjs-patterns | NestJS |
+| springboot-patterns | Spring Boot |
+| flutter-dart-code-review | Flutter |
 
 ## Custom Subagents (5)
 
@@ -77,13 +110,36 @@ docs/                   # Human documentation (generated from src/)
 "update docs" or "generate codemap"
 ```
 
+## Skills Usage Examples
+
+```bash
+# Code quality
+"audit my project with web-quality-audit"
+"improve Core Web Vitals"
+
+# Development
+"help me set up TDD workflow"
+"generate a code tour"
+"create onboarding guide for new devs"
+
+# Frameworks
+"optimize my Next.js app with turbopack"
+"review my Django patterns"
+
+# Deployment
+"deploy to Vercel"
+"setup Docker for my project"
+```
+
 ## Resources
 
-- [VoltAgent - 144 Claude Code Subagents](https://github.com/VoltAgent/awesome-claude-code-subagents)
-- [everything-claude-code - affaan-m](https://github.com/affaan-m/everything-claude-code)
-- [Web Quality Skills - Addy Osmani](https://github.com/addyosmani/web-quality-skills)
-- [Vercel Agent Skills](https://github.com/vercel-labs/agent-skills)
-- [Skills.sh - Skills Marketplace](https://skills.sh/)
+| Source | Count | Links |
+|--------|-------|-------|
+| VoltAgent | 144 agents | [GitHub](https://github.com/VoltAgent/awesome-claude-code-subagents) |
+| everything-claude-code | 55 agents + 200 skills | [GitHub](https://github.com/affaan-m/everything-claude-code) |
+| Web Quality Skills | 4 skills | [GitHub](https://github.com/addyosmani/web-quality-skills) |
+| Vercel Agent Skills | 7 skills | [GitHub](https://github.com/vercel-labs/agent-skills) |
+| Skills.sh | Marketplace | [Website](https://skills.sh/) |
 
 ## License
 

@@ -3,8 +3,20 @@
 ## Overview
 
 This project uses:
-- `.opencode/agents/` - 144+ VoltAgent agents (main, organized by category)
-- `.opencode/subagents/` - Custom OpenCode subagents (git-agent, task-manager)
+- `.opencode/agents/` - 144+ VoltAgent agents (main, organized by 10 categories)
+- `.opencode/subagents/` - 5 Custom OpenCode subagents
+- `.opencode/skills/` - 31 skills installed
+
+## Skill Sources
+
+| Source | Count | Skills |
+|--------|-------|--------|
+| [affaan-m/everything-claude-code](https://github.com/affaan-m/everything-claude-code) | 16 | git-workflow, codebase-onboarding, tdd-workflow, code-tour, api-design, docker-patterns, click-path-audit, deployment-patterns, deep-research, frontend-patterns, backend-patterns, nextjs-turbopack, django-patterns, laravel-patterns, nestjs-patterns, springboot-patterns, flutter-dart-code-review |
+| [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) | 7 | vercel-react-best-practices, web-design-guidelines, vercel-react-native-skills, vercel-react-view-transitions, vercel-composition-patterns, deploy-to-vercel, vercel-cli-with-tokens |
+| [addyosmani/web-quality-skills](https://github.com/addyosmani/web-quality-skills) | 4 | web-quality-audit, performance, core-web-vitals, best-practices |
+| [vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser) | 1 | agent-browser |
+| [rtk-ai/rtk](https://github.com/rtk-ai/rtk) | 1 | rtk-token-optimizer |
+| [skills.sh](https://skills.sh/) | 2 | find-skills, conventional-commits |
 
 ## Custom Subagents
 
